@@ -1,0 +1,6 @@
+// Edit the menu here once; every page updates.
+const pages=[["index.html","Home"],["peace-corps.html","Peace Corps"],["virtual-enterprises.html","Kanapaha and VEI"],["florida-scholars.html","Florida Scholars Academy"],["education.html","Education"],["goals.html","Career goals"],["resume.html","Resume"]];
+const here=location.pathname.split("/").pop()||"index.html";
+const links=pages.map(([h,t])=>`<li><a href="${h}"${h===here?' aria-current="page"':""}>${t}</a></li>`).join("")+'<li><a href="#contact">Contact</a></li>';
+document.body.insertAdjacentHTML("afterbegin",`<header><nav class="wrap" aria-label="Main"><a class="logo" href="index.html">David Jackson</a><ul>${links}</ul></nav></header>`);
+document.body.insertAdjacentHTML("beforeend",`<footer class="contact" id="contact"><div class="wrap"><h2>Let's talk about your students</h2><p>I'm available for secondary teaching roles after my Peace Corps service. I'd welcome a conversation with any principal or department head.</p><p><a class="big" href="mailto:Dbjackson2001@gmail.com">Dbjackson2001@gmail.com</a></p><p><a href="https://www.linkedin.com/in/dbj01/">linkedin.com/in/dbj01</a></p><small>&copy; 2026 David Jackson. Gainesville, FL and Matara, Peru.</small></div></footer>`);
