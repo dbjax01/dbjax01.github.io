@@ -2,7 +2,7 @@
 const before = [["index.html", "Home"]];
 const dropdown = [
   ["florida-scholars.html", "Florida Scholars Academy"],
-  ["virtual-enterprises.html", "Kanapaha Middle School"],
+  ["kanapaha.html", "Kanapaha Middle School"],
   ["flo-fly.html", "Flo-Fly"],
   ["education.html", "Education"]
 ];
