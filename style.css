@@ -61,3 +61,16 @@ nav ul a:hover,nav ul a[aria-current]{color:var(--ink);text-decoration:underline
 .hero .wrap,.split,.pillar,.schools,.job{grid-template-columns:1fr;gap:24px}.job{gap:6px}
 .pillar:nth-of-type(even) .copy{order:0}.cards,.creds{grid-template-columns:1fr}.courses{columns:1}.gallery{grid-template-columns:repeat(2,1fr)}.logo{display:none}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* Dropdown menu */
+nav.wrap{height:auto;min-height:60px;padding-top:8px;padding-bottom:8px}
+nav>ul{overflow:visible;flex-wrap:wrap;white-space:normal;justify-content:flex-end;row-gap:6px}
+.dd{position:relative}
+.dd>button{font:600 .9rem var(--head);color:var(--ink2);background:none;border:0;padding:0;cursor:pointer}
+.dd>button:hover,.dd>button[aria-current]{color:var(--ink);text-decoration:underline;text-decoration-color:var(--pencil);text-decoration-thickness:3px;text-underline-offset:6px}
+nav .dd ul{display:none;position:absolute;top:100%;left:-12px;flex-direction:column;gap:0;min-width:250px;padding:8px 0;background:var(--white);border:1px solid var(--line);border-radius:6px;box-shadow:0 8px 24px rgba(20,40,58,.12)}
+nav .dd.open ul,nav .dd:hover ul{display:flex}
+nav .dd ul a{display:block;padding:9px 16px}
+/* Line up photos across the two school cards */
+.school{display:flex;flex-direction:column}
+.school .ph,.school .pic{margin-top:auto}
+.school > p:nth-of-type(2){margin-bottom:20px}
