@@ -6,6 +6,36 @@
   <title>Resume | David Jackson</title>
   <link rel="stylesheet" href="/style.css">
   <script src="/site.js" defer></script>
+
+  <!-- Timeline styles. Everything starts with tl- so it never collides with style.css -->
+  <style>
+    .tl-section{padding:20px 0 40px}
+    .tl-legend{display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;margin-bottom:14px;font:600 .9rem var(--head);color:var(--ink2)}
+    .tl-legend span{display:inline-flex;align-items:center;gap:8px}
+    .tl-legend i{display:inline-block;width:14px;height:14px;border-radius:3px}
+    .tl-legend .hint{margin-left:auto;font:400 .9rem var(--body)}
+    .tl-scroll{overflow-x:auto;overflow-y:hidden;background:var(--white);border:2px solid var(--ink);border-radius:6px;scrollbar-width:thin;scrollbar-color:var(--ink) var(--sky)}
+    .tl-scroll:focus-visible{outline:3px solid var(--pencil);outline-offset:3px}
+    .tl-canvas{position:relative}
+    .tl-year{position:absolute;top:0;bottom:0;border-left:1px solid var(--line)}
+    .tl-year b{position:absolute;top:8px;left:8px;font:700 .85rem var(--head);color:var(--ink2)}
+    .tl-today{position:absolute;top:0;bottom:0;z-index:3;border-left:2px dashed var(--ink)}
+    .tl-today b{position:absolute;top:8px;left:8px;padding:2px 10px;border-radius:99px;background:var(--pencil);color:var(--ink);font:700 .75rem var(--head)}
+    .tl-bar{position:absolute;z-index:2;box-sizing:border-box;display:flex;align-items:center;height:46px;padding:0 12px;border-radius:6px;text-decoration:none;overflow:hidden;overflow:clip}
+    .tl-bar.edu{background:var(--ink);color:#fff}
+    .tl-bar.work{background:var(--chalk);color:#fff}
+    .tl-bar.pc{background:var(--pencil);color:var(--ink)}
+    .tl-bar.live{background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.18) 0 6px,transparent 6px 12px)}
+    .tl-bar.pc.live{background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.4) 0 6px,transparent 6px 12px)}
+    a.tl-bar:hover,a.tl-bar:focus-visible{outline:3px solid var(--pencil);outline-offset:2px}
+    a.tl-bar.pc:hover,a.tl-bar.pc:focus-visible{outline-color:var(--ink)}
+    .tl-label{position:sticky;left:12px;min-width:0;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .tl-label strong{display:block;font:700 .92rem var(--head);overflow:hidden;text-overflow:ellipsis}
+    .tl-label small{display:block;font:400 .78rem var(--body);overflow:hidden;text-overflow:ellipsis}
+    .btns.tl-nav{margin-top:16px}
+    .tl-nav .btn{background:transparent;color:var(--ink);cursor:pointer;font-size:.95rem;padding:8px 16px}
+    @media (max-width:600px){.tl-legend .hint{margin-left:0;width:100%}}
+  </style>
 </head>
 <body>
 <main>
@@ -16,6 +46,26 @@
     <h1>Resume</h1>
     <div class="btns">
       <a class="btn main" href="/docs/resume-david-jackson.pdf" target="_blank" rel="noopener">View resume (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="tl-section">
+  <div class="wrap">
+    <div class="tl-legend">
+      <span><i style="background:var(--ink)"></i>Education</span>
+      <span><i style="background:var(--chalk)"></i>Work</span>
+      <span><i style="background:var(--pencil)"></i>Peace Corps</span>
+      <span class="hint">It scrolls on its own. Scroll, drag, or tap to take over.</span>
+    </div>
+    <div class="tl-scroll" id="tlScroll" tabindex="0" role="region" aria-label="Education and work timeline from 2018 to 2028. Scrolls horizontally.">
+      <div class="tl-canvas" id="tlCanvas"></div>
+    </div>
+    <div class="btns tl-nav">
+      <button type="button" class="btn alt" id="tlPrev" aria-label="Scroll timeline earlier">Earlier</button>
+      <button type="button" class="btn alt" id="tlNext" aria-label="Scroll timeline later">Later</button>
+      <button type="button" class="btn alt" id="tlPlay" aria-label="Pause or play the automatic scrolling">Pause</button>
     </div>
   </div>
 </section>
@@ -118,5 +168,158 @@
 </section>
 
 </main>
+
+<!-- TIMELINE SCRIPT -->
+<script>
+(function () {
+  // Edit this list to change the timeline.
+  // k: edu | work | pc    Dates are YYYY-MM-DD    h (optional): page the bar links to
+  var ITEMS = [
+    { k: 'edu',  t: 'B.A. Business Administration + B.A. Education Sciences', o: 'University of Florida', s: '2019-08-20', e: '2023-05-09', h: '/education/' },
+    { k: 'edu',  t: 'M.S. International Real Estate', o: 'Florida International University', s: '2023-08-21', e: '2024-08-08', h: '/education/' },
+    { k: 'work', t: 'Grocery Clerk', o: 'Publix Supermarkets', s: '2018-09-15', e: '2025-12-21' },
+    { k: 'work', t: 'Paraprofessional', o: 'Buchholz High School', s: '2022-08-22', e: '2023-05-31' },
+    { k: 'work', t: 'CTE Teacher', o: 'Kanapaha Middle School', s: '2023-08-01', e: '2024-05-31', h: '/kanapaha/' },
+    { k: 'work', t: 'Math and Science Instructor', o: 'Florida Virtual School', s: '2024-12-02', e: '2026-02-13', h: '/fsa/' },
+    { k: 'work', t: 'Business Tutor', o: 'Santa Fe College', s: '2025-05-01', e: '2026-02-09' },
+    { k: 'pc',   t: 'Community Economic Development Volunteer', o: 'Peace Corps, Peru', s: '2026-04-07', e: '2028-05-29', h: '/peace_corps/' }
+  ];
+
+  var SPEED = 45;                      // auto-scroll speed in pixels per second (lower = slower)
+  var START = new Date(2018, 6, 1);    // Jul 2018
+  var END   = new Date(2028, 6, 1);    // Jul 2028
+  var PX_PER_MONTH = 22;
+  var BAR_H = 46, GAP = 8, TOP = 36, BOTTOM = 18, GROUP_GAP = 16;
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function parse(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function monthsFromStart(d) {
+    return (d.getFullYear() - START.getFullYear()) * 12 + (d.getMonth() - START.getMonth()) + (d.getDate() - 1) / 30;
+  }
+  function x(d) { return monthsFromStart(d) * PX_PER_MONTH; }
+  function fmt(d) { return MONTHS[d.getMonth()] + ' ' + d.getFullYear(); }
+
+  var canvas = document.getElementById('tlCanvas');
+  var scroller = document.getElementById('tlScroll');
+  var playBtn = document.getElementById('tlPlay');
+  if (!canvas || !scroller) return;
+
+  // Stack overlapping items into separate rows (education on top, work and Peace Corps below)
+  function pack(list) {
+    var laneEnds = [];
+    list.sort(function (a, b) { return parse(a.s) - parse(b.s); });
+    list.forEach(function (it) {
+      var s = parse(it.s), placed = false;
+      for (var i = 0; i < laneEnds.length; i++) {
+        if (s > laneEnds[i]) { it.lane = i; laneEnds[i] = parse(it.e); placed = true; break; }
+      }
+      if (!placed) { it.lane = laneEnds.length; laneEnds.push(parse(it.e)); }
+    });
+    return laneEnds.length;
+  }
+  var edu  = ITEMS.filter(function (i) { return i.k === 'edu'; });
+  var work = ITEMS.filter(function (i) { return i.k !== 'edu'; });
+  var eduLanes = pack(edu), workLanes = pack(work);
+  var workTop = TOP + eduLanes * (BAR_H + GAP) + GROUP_GAP;
+
+  canvas.style.width  = Math.round(x(END)) + 'px';
+  canvas.style.height = (workTop + workLanes * (BAR_H + GAP) + BOTTOM) + 'px';
+
+  // Year lines
+  for (var y = START.getFullYear() + 1; y <= END.getFullYear(); y++) {
+    var line = document.createElement('div');
+    line.className = 'tl-year';
+    line.style.left = Math.round(x(new Date(y, 0, 1))) + 'px';
+    var yl = document.createElement('b'); yl.textContent = y;
+    line.appendChild(yl); canvas.appendChild(line);
+  }
+
+  // Bars
+  var now = new Date();
+  function addBars(list, baseTop) {
+    list.forEach(function (it) {
+      var s = parse(it.s), e = parse(it.e), ongoing = e > now;
+      var bar = document.createElement(it.h ? 'a' : 'div');
+      if (it.h) bar.href = it.h;
+      bar.className = 'tl-bar ' + it.k + (ongoing ? ' live' : '');
+      bar.style.left = x(s) + 'px';
+      bar.style.width = Math.max(x(e) - x(s), 6) + 'px';
+      bar.style.top = (baseTop + it.lane * (BAR_H + GAP)) + 'px';
+      var range = fmt(s) + ' to ' + (ongoing && it.k === 'pc' ? 'present (ends ' + fmt(e) + ')' : fmt(e));
+      bar.title = it.t + ', ' + it.o + ' (' + range + ')';
+      var label = document.createElement('div'); label.className = 'tl-label';
+      var strong = document.createElement('strong'); strong.textContent = it.t;
+      var small = document.createElement('small'); small.textContent = it.o; // Just shows the organization name without dates
+      label.appendChild(strong); label.appendChild(small); bar.appendChild(label);
+      canvas.appendChild(bar);
+    });
+  }
+  addBars(edu, TOP);
+  addBars(work, workTop);
+
+  // "Today" marker
+  if (now > START && now < END) {
+    var t = document.createElement('div'); t.className = 'tl-today';
+    t.style.left = Math.round(x(now)) + 'px';
+    var tb = document.createElement('b'); tb.textContent = 'Today';
+    t.appendChild(tb); canvas.appendChild(t);
+  }
+
+  // ---- Slow auto-scroll that any interaction cancels ----
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var auto = false, raf = 0, pos = 0, last = 0, lastSet = 0;
+
+  function maxScroll() { return scroller.scrollWidth - scroller.clientWidth; }
+  function setAuto(on) {
+    auto = on;
+    cancelAnimationFrame(raf);
+    playBtn.textContent = on ? 'Pause' : 'Play';
+    if (!on) return;
+    if (scroller.scrollLeft >= maxScroll() - 2) scroller.scrollLeft = 0;   // replay from the start
+    pos = scroller.scrollLeft; lastSet = pos; last = performance.now();
+    raf = requestAnimationFrame(tick);
+  }
+  function tick(now) {
+    if (!auto) return;
+    pos += SPEED * Math.min(64, now - last) / 1000;
+    last = now;
+    var max = maxScroll();
+    if (pos >= max) { scroller.scrollLeft = max; setAuto(false); return; }   // stop at the end
+    scroller.scrollLeft = pos;
+    lastSet = scroller.scrollLeft;
+    raf = requestAnimationFrame(tick);
+  }
+  function takeOver() { if (auto) setAuto(false); }
+
+  // Any wheel, touch, click, drag, or key press hands control to the visitor
+  ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(function (ev) {
+    scroller.addEventListener(ev, takeOver, { passive: true });
+  });
+  // Dragging the scrollbar changes the position without those events, so compare positions too
+  scroller.addEventListener('scroll', function () {
+    if (auto && Math.abs(scroller.scrollLeft - lastSet) > 3) setAuto(false);
+  });
+
+  playBtn.addEventListener('click', function () { setAuto(!auto); });
+  function step(dir) {
+    takeOver();
+    scroller.scrollBy({ left: dir * scroller.clientWidth * 0.7, behavior: reduce ? 'auto' : 'smooth' });
+  }
+  document.getElementById('tlPrev').addEventListener('click', function () { step(-1); });
+  document.getElementById('tlNext').addEventListener('click', function () { step(1); });
+
+  // Begin at 2018 and start drifting once the timeline is in view
+  scroller.scrollLeft = 0;
+  playBtn.textContent = 'Play';
+  if (!reduce) {
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { io.disconnect(); setAuto(true); }
+      }, { threshold: 0.5 });
+      io.observe(scroller);
+    } else { setAuto(true); }
+  }
+})();
+</script>
 </body>
 </html>
