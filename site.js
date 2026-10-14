@@ -1,14 +1,15 @@
 // Edit the menu here once; every page updates.
-const before = [["index.html", "Home"]];
+const before = [["/", "Home"]];
 const dropdown = [
-  ["florida-scholars.html", "Florida Scholars Academy"],
-  ["kanapaha.html", "Kanapaha Middle School"],
-  ["flo-fly.html", "Flo-Fly"],
-  ["education.html", "Education"]
+  ["/fsa/", "Florida Scholars Academy"],
+  ["/kanapaha/", "Kanapaha Middle School"],
+  ["/flo-fly/", "Flo-Fly"],
+  ["/education/", "Education"]
 ];
-const after = [["peace-corps.html", "Peace Corps"], ["goals.html", "Career Goals"], ["resume.html", "Resume"]];
+const after = [["/peace_corps/", "Peace Corps"], ["/goals/", "Career Goals"], ["/resume/", "Resume"]];
 
-const here = location.pathname.split("/").pop() || "index.html";
+// Normalize the current address so "/education", "/education/" and "/education/index.html" all match "/education/"
+const here = location.pathname.replace(/index\.html$/, "").replace(/\/?$/, "/");
 const item = ([h, t]) => `<li><a href="${h}"${h === here ? ' aria-current="page"' : ""}>${t}</a></li>`;
 const inDropdown = dropdown.some(([h]) => h === here);
 
@@ -18,9 +19,9 @@ const links =
   after.map(item).join("") +
   '<li><a href="#contact">Contact</a></li>';
 
-document.head.insertAdjacentHTML("beforeend", '<link rel="icon" href="photos/favicon.svg" type="image/svg+xml"><link rel="icon" href="photos/favicon.ico" sizes="any">');
+document.head.insertAdjacentHTML("beforeend", '<link rel="icon" href="/photos/favicon.svg" type="image/svg+xml"><link rel="icon" href="/photos/favicon.ico" sizes="any">');
 
-document.body.insertAdjacentHTML("afterbegin", `<header><nav class="wrap" aria-label="Main"><a class="logo" href="index.html">David Jackson</a><ul>${links}</ul></nav></header>`);
+document.body.insertAdjacentHTML("afterbegin", `<header><nav class="wrap" aria-label="Main"><a class="logo" href="/">David Jackson</a><ul>${links}</ul></nav></header>`);
 
 document.body.insertAdjacentHTML("beforeend", `<footer class="contact" id="contact"><div class="wrap"><h2>Let's talk about your students</h2><p>I'm available for secondary teaching roles after my Peace Corps service. I'd welcome a conversation with any principal or department head.</p><p><a class="big" href="mailto:Dbjackson2001@gmail.com">Dbjackson2001@gmail.com</a></p><p><a href="https://www.linkedin.com/in/dbj01/">linkedin.com/in/dbj01</a></p></div></footer>`);
 
