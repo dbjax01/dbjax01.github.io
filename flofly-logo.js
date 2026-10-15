@@ -65,11 +65,11 @@
   const phiAt = (ms) => TOTAL * ease(clamp(ms / SPIN, 0, 1)); // degrees turned so far
 
   let streakOpacity = 0; // only ever goes up: streaks fade in while speeding up, then stay
-  const render = (phi, omega) => {
+  const render = (phi, omega, withText = true) => {
     const rot = phi % 360;
     main.setAttribute("transform", spin(rot));
     // Blue streaks turn with the propeller and fade in as it gains speed
-    streakOpacity = clamp((phi - FADE_FROM) / (FADE_TO - FADE_FROM), 0, 1);
+    streakOpacity = withText ? clamp((phi - FADE_FROM) / (FADE_TO - FADE_FROM), 0, 1) : 1;
     streakG.setAttribute("transform", spin(rot));
     streakG.setAttribute("opacity", streakOpacity.toFixed(3));
     // Faint trailing copies of the propeller add to the motion-blur feel while it is fast
@@ -79,7 +79,7 @@
       g.setAttribute("opacity", (speed * (0.3 - 0.09 * i)).toFixed(3));
     });
     // Text: uncovered by the left blade during the final turn
-    textW.setAttribute("d", wedge(LEFT, clamp(phi - (TOTAL - 360) - LAG, 0, 360)));
+    if (withText) textW.setAttribute("d", wedge(LEFT, clamp(phi - (TOTAL - 360) - LAG, 0, 360)));
   };
 
   const finish = () => {
@@ -90,18 +90,27 @@
     textG.removeAttribute("mask");
   };
 
-  let raf = 0;
-  const play = () => {
+  let raf = 0, busy = true; // busy until the first animation finishes
+  const play = (replay = false) => {
     const t0 = performance.now();
     const tick = (now) => {
       const ms = now - t0;
-      if (ms >= SPIN) { finish(); return; }
+      if (ms >= SPIN) { finish(); busy = false; return; }
       const omega = (phiAt(ms + 8) - phiAt(ms - 8)) / 0.016; // degrees per second
-      render(phiAt(ms), omega);
+      render(phiAt(ms), omega, !replay);
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
   };
+
+    // Click, tap, or Enter/Space on the logo: spin the propeller and streaks again (the text stays put)
+  host.style.cursor = "pointer";
+  host.setAttribute("role", "button");
+  host.setAttribute("tabindex", "0");
+  host.setAttribute("aria-label", "Flo-Fly logo. Activate to spin the propeller again.");
+  const again = () => { if (busy || matchMedia("(prefers-reduced-motion: reduce)").matches) return; play(true); };
+  host.addEventListener("click", again);
+  host.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); again(); } });
 
   // Start state: just the propeller
   render(0, 0);

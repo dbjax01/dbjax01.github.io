@@ -5,8 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Flo-Fly | David Jackson</title>
   <link rel="stylesheet" href="/style.css">
+  <style>
+    /* ---------- Business plan PDF viewer ---------- */
+    .pdfv{display:flex;flex-direction:column;margin-top:32px;border:2px solid var(--ink);border-radius:6px;background:var(--white);overflow:hidden}
+    .pdfv-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:10px 14px;border-bottom:1px solid var(--line);font:600 .9rem var(--head);color:var(--ink2)}
+    .pdfv-bar .sp{flex:1}
+    .pdfv-bar label{display:flex;align-items:center;gap:8px}
+    .pdfv button,.pdfv select,.pdfv a.dl{font:700 .9rem var(--head);padding:8px 14px;border-radius:4px;border:2px solid var(--ink);background:var(--white);color:var(--ink);cursor:pointer;text-decoration:none;line-height:1.2}
+    .pdfv button:hover,.pdfv a.dl:hover{background:var(--sky)}
+    .pdfv button.main{background:var(--ink);color:var(--white);min-width:116px}
+    .pdfv button.main:hover{background:var(--chalk)}
+    .pdfv button:disabled{opacity:.5;cursor:default}
+    .pdfv-prog{height:4px;background:var(--line)}
+    .pdfv-prog i{display:block;height:100%;width:0;background:var(--pencil)}
+    .pdfv-scroll{height:min(78vh,860px);overflow-y:auto;background:var(--sky);padding:20px;scroll-behavior:auto}
+    .pdfv-scroll:focus-visible{outline-offset:-4px}
+    .pdfv-pages{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+    .pdfv-page{flex:none;width:100%;background:var(--white);box-shadow:0 2px 12px rgba(20,40,58,.18)}
+    .pdfv-page canvas{display:block;width:100%;height:100%}
+    .pdfv-err{background:#FFF3CC;border-left:4px solid var(--pencil);padding:12px 16px;font:600 .95rem var(--head);color:#5a4300}
+    .pdfv.is-full{border:0;border-radius:0;width:100%;height:100%}
+    .pdfv.is-full .pdfv-scroll{flex:1;height:auto;min-height:0}
+    .pdfv.is-full .pdfv-pages{max-width:1000px}
+    .pdfv.pseudo{position:fixed;inset:0;z-index:50}
+    @media (max-width:820px){.pdfv-scroll{padding:10px}.pdfv-bar .sp{display:none}}
+
+    /* ---------- Competition animation ---------- */
+    .dark .lede{color:#C9D9D8}
+    .funnel{margin-top:28px}
+    .funnel-cap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin-bottom:14px;min-height:3.4rem}
+    .funnel-n{font:700 clamp(2.2rem,5vw,3.4rem)/1 var(--head);color:var(--white);min-width:1.9em}
+    .funnel-t{flex:1 1 260px;font-size:1.1rem;color:#EAF2F1}
+    .funnel-btn{font:700 .95rem var(--head);padding:8px 14px;border-radius:4px;border:2px solid #EAF2F1;background:none;color:var(--white);cursor:pointer}
+    .funnel-btn:hover{background:rgba(255,255,255,.12)}
+    .funnel canvas{display:block;width:100%;aspect-ratio:2/1}
+    @media (max-width:640px){.funnel canvas{aspect-ratio:1/1.1}}
+  </style>
   <script src="/site.js" defer></script>
   <script src="/flofly-logo.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
 </head>
 <body>
 <main>
@@ -84,6 +121,11 @@
   </div>
 </section>
 
+<!--
+  PHOTOS: each box below with data-photo="N" loads /photos/flo-flyN.jpg automatically
+  (data-photo="1" -> flo-fly1.jpg, data-photo="2" -> flo-fly2.jpg ... see PHOTO_PREFIX in the script at the bottom).
+  Until that file exists, the dashed placeholder stays visible. data-alt is the description for screen readers.
+-->
 <section>
   <div class="wrap">
     <h2>What I did</h2>
@@ -108,11 +150,11 @@
       </article>
     </div>
     <div class="gallery">
-      <div class="ph">Photo: Flo-Fly website homepage</div>
-      <div class="ph">Photo: postcard, front</div>
-      <div class="ph">Photo: postcard, back</div>
-      <div class="ph">Photo: pitch or team</div>
-      <div class="ph">Photo</div>
+      <div class="ph" data-photo="1" data-alt="The Flo-Fly website homepage">Photo: Flo-Fly website homepage</div>
+      <div class="ph" data-photo="2" data-alt="Front of the Flo-Fly postcard">Photo: postcard, front</div>
+      <div class="ph" data-photo="3" data-alt="Back of the Flo-Fly postcard">Photo: postcard, back</div>
+      <div class="ph" data-photo="4" data-alt="The Flo-Fly team pitching">Photo: pitch or team</div>
+      <div class="ph" data-photo="5" data-alt="Flo-Fly">Photo</div>
     </div>
   </div>
 </section>
@@ -144,6 +186,7 @@
         </p>
       </div>
     </div>
+    <p style="margin-top:28px"><a class="more" href="#business-plan">Read the full business plan</a></p>
     <p class="todo">Optional: add one line on what surprised you most when you tested the plan against real pilots and customers.</p>
   </div>
 </section>
@@ -165,11 +208,425 @@
       <p class="todo">Edit the teaching paragraph so it sounds like you, and add a lesson you learned from something that did not go as planned.</p>
     </div>
     <div>
-      <div class="ph">Photo: you presenting at Big Idea, or the award</div>
+      <div class="ph" data-photo="6" data-alt="David presenting Flo-Fly at the UF Big Idea competition">Photo: you presenting at Big Idea, or the award</div>
     </div>
   </div>
 </section>
 
+<section class="dark" id="competition">
+  <div class="wrap">
+    <h2>How the competition worked</h2>
+    <p class="lede" style="margin-top:0">
+      Flo-Fly started in a field of 200 business plans. The competition narrowed it in two rounds:
+      16 semifinalists in 4 groups of 4, then 4 finalists. Watch it happen, and see if you can spot ours.
+    </p>
+    <div class="funnel">
+      <div class="funnel-cap">
+        <span class="funnel-n">200</span>
+        <span class="funnel-t">business plans entered. One of them is ours.</span>
+        <button type="button" class="funnel-btn">Replay</button>
+      </div>
+      <canvas role="img" aria-label="Animation: 200 business plans float around, then are narrowed to 16 semifinalists in 4 groups of 4, then to 4 finalists. Flo-Fly is one of the finalists."></canvas>
+    </div>
+  </div>
+</section>
+
+<section id="business-plan">
+  <div class="wrap">
+    <h2>The full business plan</h2>
+    <p class="lede" style="margin-top:0">
+      This is the plan I submitted to the UF Big Idea competition. It scrolls on its own so you can see the whole document.
+      Scroll, tap, or press a key to take over, or open it full screen.
+    </p>
+
+    <!-- To change the file, edit data-src (and the Download link below) -->
+    <div class="pdfv" data-src="/flo-fly/flo-fly_business_plan.pdf">
+      <div class="pdfv-bar">
+        <button type="button" class="main" data-act="play">Play</button>
+        <label>Speed
+          <select data-act="speed" aria-label="Auto-scroll speed">
+            <option value="30">Slow</option>
+            <option value="60" selected>Medium</option>
+            <option value="120">Fast</option>
+          </select>
+        </label>
+        <span class="pdfv-status">Loading the plan...</span>
+        <span class="sp"></span>
+        <a class="dl" href="/flo-fly/flo-fly_business_plan.pdf" download>Download PDF</a>
+        <button type="button" data-act="full">Full screen</button>
+      </div>
+      <div class="pdfv-prog" aria-hidden="true"><i></i></div>
+      <div class="pdfv-scroll" tabindex="0" role="region" aria-label="Flo-Fly business plan. Use the arrow keys to scroll.">
+        <div class="pdfv-pages"></div>
+      </div>
+    </div>
+    <noscript><p class="todo">JavaScript is needed for the scrolling viewer. <a href="/flo-fly/flo-fly_business_plan.pdf">Open the business plan as a PDF.</a></p></noscript>
+  </div>
+</section>
+
 </main>
+
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+
+  /* =====================================================
+     1. PHOTOS. Change these three lines if you rename files.
+     data-photo="3" -> /photos/flo-fly3.jpg
+     ===================================================== */
+  const PHOTO_DIR = "/photos/";
+  const PHOTO_PREFIX = "flo-fly";
+  const PHOTO_EXT = ".jpg";
+
+  document.querySelectorAll(".ph[data-photo]").forEach((box) => {
+    const img = new Image();
+    img.alt = box.dataset.alt || "";
+    img.loading = "lazy";
+    img.onload = () => box.style.border = "0";   // photo found: drop the dashed placeholder border
+    img.onerror = () => img.remove();            // no file yet: keep the placeholder
+    img.src = PHOTO_DIR + PHOTO_PREFIX + box.dataset.photo + PHOTO_EXT;
+    box.appendChild(img);
+  });
+
+  /* =====================================================
+     2. PDF VIEWER with auto-scroll
+     ===================================================== */
+  const root = document.querySelector(".pdfv");
+  if (!root) return;
+  const $ = (s) => root.querySelector(s);
+  const scroller = $(".pdfv-scroll"), pagesEl = $(".pdfv-pages"), prog = $(".pdfv-prog i");
+  const playBtn = $('[data-act="play"]'), speedSel = $('[data-act="speed"]'), fullBtn = $('[data-act="full"]'), status = $(".pdfv-status");
+
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let speed = +speedSel.value;            // pixels per second
+  let playing = !reduced, ended = false;  // starts on its own unless the visitor prefers less motion
+  let inView = false, ready = false, seen = false;
+  let hold = 0, pos = 0, last = 0;
+  const pages = [];
+
+  const fail = () => {
+    pagesEl.innerHTML = '<p class="pdfv-err">The viewer could not load. <a href="' + root.dataset.src + '">Open the business plan as a PDF.</a></p>';
+    status.textContent = "";
+    playBtn.disabled = true; speedSel.disabled = true; fullBtn.disabled = true;
+  };
+  if (!window.pdfjsLib) { fail(); return; }
+
+  /* ---- Play / pause / replay ---- */
+  const ui = () => {
+    playBtn.textContent = ended ? "\u21BA Replay" : playing ? "\u275A\u275A Pause" : scroller.scrollTop > 2 ? "\u25B6 Resume" : "\u25B6 Play";
+  };
+  const pause = () => { if (playing) { playing = false; ui(); } };
+  const play = () => {
+    if (ended) { scroller.scrollTop = 0; ended = false; }
+    pos = scroller.scrollTop; playing = true; ui();
+  };
+  playBtn.addEventListener("click", () => (playing ? pause() : play()));
+  speedSel.addEventListener("change", () => { speed = +speedSel.value; });
+
+  // Any attempt to scroll by hand takes over from the auto-scroll
+  ["wheel", "touchstart", "mousedown"].forEach((ev) => scroller.addEventListener(ev, pause, { passive: true }));
+  scroller.addEventListener("keydown", (e) => {
+    if (["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(e.key)) pause();
+  });
+
+  /* ---- Auto-scroll loop (only moves while the viewer is on screen) ---- */
+  const tick = (t) => {
+    requestAnimationFrame(tick);
+    const dt = Math.min(t - last, 100) / 1000; last = t;
+    if (!playing || !inView || !ready || t < hold) return;
+    pos += speed * dt;
+    const max = scroller.scrollHeight - scroller.clientHeight;
+    if (pos >= max - 1) { scroller.scrollTop = max; playing = false; ended = true; ui(); return; }
+    scroller.scrollTop = pos;
+  };
+  requestAnimationFrame(tick);
+
+  new IntersectionObserver(([e]) => {
+    inView = e.isIntersecting;
+    if (inView && !seen) { seen = true; hold = performance.now() + 1200; } // short pause so page 1 can be seen
+  }, { threshold: 0.4 }).observe(root);
+
+  /* ---- Page counter and progress bar ---- */
+  let ticking = false;
+  scroller.addEventListener("scroll", () => {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      const max = scroller.scrollHeight - scroller.clientHeight;
+      prog.style.width = (max > 0 ? (scroller.scrollTop / max) * 100 : 0) + "%";
+      const top = scroller.getBoundingClientRect().top, line = scroller.clientHeight * 0.4;
+      let cur = 1;
+      pages.forEach((w, i) => { if (w.el.getBoundingClientRect().top - top <= line) cur = i + 1; });
+      if (pages.length) status.textContent = "Page " + cur + " of " + pages.length;
+      if (!playing && !ended) ui();
+    });
+  }, { passive: true });
+
+  /* ---- Rendering: pages are drawn only when near the screen, and freed when far away ---- */
+  const draw = async (w) => {
+    if (w.busy) return;
+    const width = w.el.clientWidth;
+    if (!width) return;
+    w.busy = true;
+    try {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const vp = w.page.getViewport({ scale: (width / w.base.width) * dpr });
+      const c = document.createElement("canvas");
+      c.width = Math.floor(vp.width); c.height = Math.floor(vp.height);
+      await w.page.render({ canvasContext: c.getContext("2d"), viewport: vp }).promise;
+      if (w.visible) { w.el.replaceChildren(c); w.drawn = width; ready = true; }
+      else { w.drawn = 0; }
+    } catch (err) { /* leave the blank page; the next scroll retries */ }
+    w.busy = false;
+    if (w.visible && Math.abs(w.el.clientWidth - w.drawn) > 2) draw(w);
+  };
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      const w = e.target._w;
+      w.visible = e.isIntersecting;
+      if (w.visible) { if (Math.abs(w.el.clientWidth - w.drawn) > 2) draw(w); }
+      else if (!w.busy) { w.el.replaceChildren(); w.drawn = 0; }
+    });
+  }, { root: scroller, rootMargin: "1200px 0px" });
+
+  // Redraw sharper or smaller when the width changes (rotating a phone, full screen)
+  let rt;
+  new ResizeObserver(() => {
+    clearTimeout(rt);
+    rt = setTimeout(() => pages.forEach((w) => { if (w.visible && Math.abs(w.el.clientWidth - w.drawn) > 2) draw(w); }), 150);
+  }).observe(pagesEl);
+
+  (async () => {
+    try {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+      const pdf = await pdfjsLib.getDocument(root.dataset.src).promise;
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const base = page.getViewport({ scale: 1 });
+        const el = document.createElement("div");
+        el.className = "pdfv-page";
+        el.style.aspectRatio = base.width + " / " + base.height;
+        el.setAttribute("role", "img");
+        el.setAttribute("aria-label", "Page " + i + " of " + pdf.numPages);
+        const w = { page, base, el, drawn: 0, busy: false, visible: false };
+        el._w = w; pages.push(w);
+        pagesEl.append(el);
+        io.observe(el);
+      }
+      status.textContent = "Page 1 of " + pages.length;
+      ui();
+    } catch (err) { fail(); }
+  })();
+  ui();
+
+  /* ---- Full screen (falls back to a full-window view on iPhones, which block the Fullscreen API) ---- */
+  const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;
+  const sync = () => {
+    const on = fsEl() === root || root.classList.contains("pseudo");
+    root.classList.toggle("is-full", on);
+    fullBtn.textContent = on ? "Exit full screen" : "Full screen";
+  };
+  const leavePseudo = () => { root.classList.remove("pseudo"); document.documentElement.style.overflow = ""; sync(); };
+  fullBtn.addEventListener("click", async () => {
+    if (fsEl() === root) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
+    if (root.classList.contains("pseudo")) { leavePseudo(); return; }
+    const req = root.requestFullscreen || root.webkitRequestFullscreen;
+    try { if (!req) throw 0; await req.call(root); }
+    catch (err) { root.classList.add("pseudo"); document.documentElement.style.overflow = "hidden"; sync(); }
+  });
+  document.addEventListener("fullscreenchange", sync);
+  document.addEventListener("webkitfullscreenchange", sync);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && root.classList.contains("pseudo")) leavePseudo(); });
+});
+</script>
+<script>
+/* Competition animation: 200 plans -> 16 semifinalists (4 groups of 4) -> 4 finalists */
+window.addEventListener("DOMContentLoaded", () => {
+  const box = document.querySelector(".funnel");
+  if (!box) return;
+  const canvas = box.querySelector("canvas"), ctx = canvas.getContext("2d");
+  const numEl = box.querySelector(".funnel-n"), txtEl = box.querySelector(".funnel-t"), btn = box.querySelector(".funnel-btn");
+
+  /* ---- Settings ---- */
+  const TOTAL = 200;                 // all business plans, including Flo-Fly
+  const GROUPS = 4;                  // semifinal groups of 4 (the layout is built for 4 x 4)
+  const LOGO = "/photos/flo-fly.png";
+  const T1 = 3800, D1 = 1600;        // ms: semifinal cut starts, how long it takes
+  const T2 = 8000, D2 = 1500;        // ms: finals cut starts, how long it takes
+  const END = 10200;                 // ms: animation over
+  const STAGES = [
+    [String(TOTAL), "business plans entered. One of them is ours."],
+    [String(GROUPS * 4), "semifinalists, in " + GROUPS + " groups of 4."],
+    [String(GROUPS), "finalists. Flo-Fly was one of them and placed 4th."]
+  ];
+
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const STATIC = [2500, 7000, END];  // frames shown one by one when motion is reduced
+  const FONT = '"Bricolage Grotesque","Trebuchet MS",Arial,sans-serif';
+  const TINTS = ["#CFE3E8", "#D8E3D2", "#EBDDB0", "#DDD6E8", "#E7D3CC"];
+
+  let W = 0, H = 0, dpr = 1, pw0 = 20, pw1 = 50, pw2 = 90, t1 = [], t2 = [];
+  let running = false, t0 = 0, cur = reduced ? STATIC[0] : 0, raf = 0, stage = -1, step = 0, logoOK = false;
+
+  const logo = new Image();
+  logo.onload = () => { logoOK = true; if (!running && W) frame(cur); };
+  logo.src = LOGO;
+
+  /* ---- The papers ---- */
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const papers = [];
+  for (let i = 0; i < TOTAL; i++) {
+    const ang = rnd(0, 6.283), sp = rnd(0.012, 0.03);
+    papers.push({
+      x0: rnd(0, 1), y0: rnd(0, 1), vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp,
+      r0: rnd(-0.6, 0.6), rv: rnd(-0.2, 0.2), tint: TINTS[i % TINTS.length],
+      lines: [rnd(0.5, 1), rnd(0.5, 1), rnd(0.5, 1), rnd(0.4, 0.8)],
+      g: -1, s: -1, fin: false, base: 20
+    });
+  }
+  const ff = papers[0];                      // paper 0 is Flo-Fly
+  ff.x0 = 0.42; ff.y0 = 0.5; ff.vx = 0.012; ff.vy = -0.004;
+
+  // Pick the semifinalists. Flo-Fly sits in the last group, so it ends up in the last (4th) finals spot.
+  const others = papers.slice(1).sort(() => Math.random() - 0.5);
+  const FF_GROUP = GROUPS - 1, FF_SLOT = Math.floor(Math.random() * 4);
+  let k = 0;
+  for (let g = 0; g < GROUPS; g++) {
+    const winner = g === FF_GROUP ? FF_SLOT : Math.floor(Math.random() * 4);
+    for (let s = 0; s < 4; s++) {
+      const p = g === FF_GROUP && s === FF_SLOT ? ff : others[k++];
+      p.g = g; p.s = s; p.fin = s === winner;
+    }
+  }
+  // Draw order: eliminated first, Flo-Fly on top
+  const order = [
+    ...papers.filter((p) => p.g < 0),
+    ...papers.filter((p) => p.g >= 0 && !p.fin),
+    ...papers.filter((p) => p.fin && p !== ff),
+    ff
+  ];
+
+  /* ---- Layout (4 groups across on wide screens, 2 x 2 on phones) ---- */
+  const layout = () => {
+    const narrow = W < 640, cols = narrow ? 2 : 4, rows = narrow ? 2 : 1, cw = W / cols, ch = H / rows;
+    pw0 = Math.max(14, Math.min(26, W * 0.028));
+    pw1 = Math.min(cw * 0.3, ch * 0.22);
+    pw2 = Math.min(cw * 0.5, (ch * 0.45) / 1.3);
+    const dx = pw1 * 0.64, dy = pw1 * 1.3 * 0.58;
+    t1 = []; t2 = [];
+    for (let g = 0; g < GROUPS; g++) {
+      const cx = ((g % cols) + 0.5) * cw, cy = (Math.floor(g / cols) + 0.5) * ch;
+      t2.push({ x: cx, y: cy });
+      t1.push([0, 1, 2, 3].map((s) => ({ x: cx + (s % 2 ? dx : -dx), y: cy - 8 + (s >> 1 ? dy : -dy) })));
+    }
+    papers.forEach((p) => { p.base = p === ff ? pw0 * 1.45 : pw0; });
+  };
+
+  /* ---- Drawing ---- */
+  const c01 = (v) => Math.min(1, Math.max(0, v));
+  const lerp = (a, b, u) => a + (b - a) * u;
+  const ease = (u) => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
+  const drift = (p, s) => { const m = (v) => ((v % 1) + 1) % 1; return { x: m(p.x0 + p.vx * s) * W, y: m(p.y0 + p.vy * s) * H, r: p.r0 + p.rv * s }; };
+
+  const rr = (x, y, w, h, r) => {
+    ctx.beginPath(); ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  };
+
+  const paper = (p, x, y, w, rot, a) => {
+    const isFF = p === ff, h = w * 1.3, r = Math.max(1.5, w * 0.05);
+    ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.rotate(rot);
+    if (isFF) { ctx.shadowColor = "#E8B230"; ctx.shadowBlur = 14; }
+    else if (w > 40) { ctx.shadowColor = "rgba(0,0,0,.3)"; ctx.shadowBlur = w * 0.15; ctx.shadowOffsetY = w * 0.04; }
+    ctx.fillStyle = "#F7FAF9"; rr(-w / 2, -h / 2, w, h, r); ctx.fill();
+    ctx.shadowColor = "transparent"; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+    ctx.save(); rr(-w / 2, -h / 2, w, h, r); ctx.clip();
+    ctx.fillStyle = p.tint; ctx.fillRect(-w / 2, -h / 2, w, h * 0.13);
+    let ly = -h * 0.28, n = 4;
+    if (isFF) {
+      const lw = w * 0.72;
+      if (logoOK) ctx.drawImage(logo, -lw / 2, -h * 0.36, lw, lw * (logo.naturalHeight / logo.naturalWidth));
+      else { ctx.fillStyle = "#1C3B3A"; ctx.beginPath(); ctx.arc(0, -h * 0.08, lw / 2, 0, 6.283); ctx.fill(); }
+      ly = h * 0.24; n = 2;
+    }
+    ctx.fillStyle = "rgba(20,40,58,.3)";
+    for (let i = 0; i < n; i++) ctx.fillRect(-w * 0.38, ly + i * h * 0.14, w * 0.76 * p.lines[i], Math.max(1, h * 0.03));
+    ctx.restore();
+    if (isFF) { ctx.lineWidth = Math.max(2, w * 0.04); ctx.strokeStyle = "#E8B230"; rr(-w / 2, -h / 2, w, h, r); ctx.stroke(); }
+    ctx.restore();
+  };
+
+  const groupBoxes = (a) => {
+    if (a <= 0.01) return;
+    const ph1 = pw1 * 1.3, bw = pw1 * 2.28 + 16, bh = ph1 * 2.16 + 16;
+    ctx.save(); ctx.globalAlpha = a; ctx.setLineDash([6, 5]); ctx.lineWidth = 1.5;
+    ctx.strokeStyle = "rgba(234,242,241,.55)"; ctx.fillStyle = "rgba(234,242,241,.85)";
+    ctx.font = "600 " + (W < 640 ? 11 : 14) + "px " + FONT; ctx.textAlign = "center";
+    t2.forEach((c, g) => {
+      rr(c.x - bw / 2, c.y - 8 - bh / 2, bw, bh, 8); ctx.stroke();
+      ctx.fillText("Group " + (g + 1), c.x, c.y - 8 + bh / 2 + 16);
+    });
+    ctx.restore();
+  };
+
+  const label = (t) => {
+    const n = t < T1 ? 0 : t < T2 ? 1 : 2;
+    if (n === stage) return;
+    stage = n; numEl.textContent = STAGES[n][0]; txtEl.textContent = STAGES[n][1];
+  };
+
+  // Everything is a pure function of the time t (ms), so any moment can be drawn directly
+  const frame = (t) => {
+    if (!W) return;
+    cur = t; label(t);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+    const e1 = ease(c01((t - T1) / D1)), e2 = ease(c01((t - T2) / D2)), s = t / 1000;
+    groupBoxes(e1 * (1 - e2));
+    for (const p of order) {
+      const d = drift(p, t < T1 ? s : T1 / 1000);
+      let x, y, w, rot, a = 1;
+      if (p.g < 0) {                                  // knocked out in the first cut: keeps drifting while it fades
+        const dn = drift(p, s);
+        x = dn.x; y = dn.y; rot = dn.r; w = p.base * (1 - 0.3 * e1); a = 1 - e1;
+      } else {
+        const g1 = t1[p.g][p.s];
+        x = lerp(d.x, g1.x, e1); y = lerp(d.y, g1.y, e1); rot = d.r * (1 - e1); w = lerp(p.base, pw1, e1);
+        if (p.fin) { const g2 = t2[p.g]; x = lerp(x, g2.x, e2); y = lerp(y, g2.y, e2); w = lerp(w, pw2, e2); }
+        else a = 1 - e2;                              // knocked out in the semifinals
+      }
+      if (a > 0.01) paper(p, x, y, w, rot, a);
+    }
+  };
+
+  /* ---- Playback ---- */
+  const loop = (now) => {
+    const t = Math.min(now - t0, END);
+    frame(t);
+    if (t < END) raf = requestAnimationFrame(loop); else running = false;
+  };
+  const start = () => { cancelAnimationFrame(raf); running = true; t0 = performance.now(); raf = requestAnimationFrame(loop); };
+
+  if (reduced) {
+    btn.textContent = "Next step";
+    btn.addEventListener("click", () => { step = (step + 1) % STATIC.length; frame(STATIC[step]); });
+  } else {
+    btn.addEventListener("click", start);
+  }
+
+  const resize = () => {
+    const r = canvas.getBoundingClientRect();
+    W = r.width; H = r.height; dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    layout(); if (!running) frame(cur);
+  };
+  new ResizeObserver(resize).observe(canvas);
+
+  // Play once when the animation scrolls into view
+  new IntersectionObserver((e, o) => {
+    if (e[0].isIntersecting) { o.disconnect(); if (!reduced) setTimeout(start, 400); }
+  }, { threshold: 0.5 }).observe(canvas);
+});
+</script>
 </body>
 </html>
