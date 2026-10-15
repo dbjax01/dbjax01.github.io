@@ -6,6 +6,7 @@
   <title>Career Goals | David Jackson</title>
   <link rel="stylesheet" href="/style.css">
   <script src="/site.js" defer></script>
+  <script src="/slider.js" defer></script>
 </head>
 <body>
 <main>
@@ -18,7 +19,7 @@
   </div>
 </section>
 
-<!-- Text on the left, photo on the right -->
+<!-- Text on the left, before/after slider on the right -->
 <section style="padding-top:20px">
   <div class="wrap split">
     <div class="prose">
@@ -27,23 +28,31 @@
       <p>Next, I want a secondary classroom where students learn to budget, save, borrow wisely, and start something of their own.</p>
       <p class="todo">Add what kind of school and courses you want to teach, and what you'd build in your first year.</p>
     </div>
-    <figure style="max-width:380px;margin:0 auto">
-      <div style="aspect-ratio:3/4;overflow:hidden;border-radius:8px"><img src="/photos/2011.JPG" alt="David Jackson dressed as a teacher for Halloween, 2011" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:8px"></div>
+    <figure class="cmp-fig">
+      <div class="cmp" data-compare>
+        <img src="/photos/before.png" alt="David Jackson dressed as a teacher for Halloween, 2011" draggable="false">
+        <img class="cmp-after" src="/photos/after.png" alt="David Jackson teaching in the same outfit, 2025" draggable="false">
+        <span class="cmp-tag l">2011</span>
+        <span class="cmp-tag r">2025</span>
+        <div class="cmp-handle" role="slider" tabindex="0" aria-label="Compare the 2011 and 2025 photos" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <span class="cmp-knob" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </div>
+      <figcaption>Halloween 2011 and 2025. Drag the slider to compare.</figcaption>
     </figure>
   </div>
 </section>
 
-<!-- Photo on the left, text on the right -->
+<!-- Text only; the photos now live in the slider above -->
 <section class="white">
-  <div class="wrap split">
-    <figure style="max-width:380px;margin:0 auto">
-      <div style="aspect-ratio:3/4;overflow:hidden;border-radius:8px"><img src="/photos/2025.jpg" alt="David Jackson teaching in 2025" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:8px"></div>
-    </figure>
+  <div class="wrap">
     <div class="prose">
       <h2>What I want to build</h2>
       <p>In my own classroom, I want financial literacy to be hands-on. Students should build a real budget, compare real loan offers, and run a small business project from idea to pitch.</p>
       <p>My work at Kanapaha Middle School, with the Peace Corps in Peru, and on Flo-Fly taught me that students learn money skills best by doing them.</p>
-      <p class="todo">Replace this with your own words, and update the photo description if 2025.jpg shows something specific.</p>
+      <p class="todo">Replace this with your own words.</p>
     </div>
   </div>
 </section>
