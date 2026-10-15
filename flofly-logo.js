@@ -108,7 +108,36 @@
   host.setAttribute("role", "button");
   host.setAttribute("tabindex", "0");
   host.setAttribute("aria-label", "Flo-Fly logo. Activate to spin the propeller again.");
-  const again = () => { if (busy || matchMedia("(prefers-reduced-motion: reduce)").matches) return; play(true); };
+    // Every tap adds one more full turn. Tapping mid-spin keeps the current speed and smoothly stretches the spin.
+  const TAP_DEG = 360;                        // degrees added per tap
+  const TAP_BASE = 0.9, TAP_PER_TURN = 0.4;   // seconds: base time + extra time per full turn still to go
+  let spinRun = null;
+  const spinPose = (s, now) => {              // angle and speed of the current spin at time `now`
+    const u = clamp((now - s.t0) / (s.D * 1000), 0, 1), D = s.D, d = s.p1 - s.p0;
+    const h01 = 3 * u * u - 2 * u * u * u, h10 = u * u * u - 2 * u * u + u;
+    const dh01 = 6 * u - 6 * u * u, dh10 = 3 * u * u - 4 * u + 1;
+    return { a: s.p0 + h01 * d + h10 * D * s.v0, v: (dh01 * d + dh10 * D * s.v0) / D, done: u >= 1 };
+  };
+  const spinStep = () => {
+    const { a, v, done } = spinPose(spinRun, performance.now());
+    render(a, Math.abs(v), false);
+    if (done) { spinRun = null; finish(); return; }
+    requestAnimationFrame(spinStep);
+  };
+  const again = () => {
+    if (busy || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const now = performance.now();
+    if (spinRun) {                            // already spinning: add a turn, carry on from the current angle and speed
+      const { a, v } = spinPose(spinRun, now);
+      const p1 = spinRun.p1 + TAP_DEG, d = p1 - a;
+      let D = TAP_BASE + TAP_PER_TURN * (d / 360);
+      if (v > 0) D = Math.min(D, 2.5 * d / v);   // keeps the propeller from ever slowing or reversing mid-spin
+      spinRun = { p0: a, v0: v, p1, D, t0: now };
+    } else {
+      spinRun = { p0: 0, v0: 0, p1: TAP_DEG, D: TAP_BASE + TAP_PER_TURN, t0: now };
+      requestAnimationFrame(spinStep);
+    }
+  };
   host.addEventListener("click", again);
   host.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); again(); } });
 

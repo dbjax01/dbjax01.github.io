@@ -14,65 +14,60 @@
 
   /* ---- Topics (the filter chips). A course can have several. ---- */
   const TOPICS = [
-    ["teach", "Teaching & Learning"],
+    ["comm", "Communication & Professional Skills"],
     ["incl", "Inclusive Teaching"],
-    ["tech", "Technology"],
-    ["fin", "Finance & Economics"],
-    ["ent", "Entrepreneurship"],
-    ["mgmt", "Management"],
-    ["re", "Real Estate"],
-    ["law", "Law"],
-    ["quant", "Data & Analysis"],
-    ["global", "Global"],
+    ["edtech", "Educational Technology"],
+    ["quant", "Financial & Quantitative Analysis"],
+    ["lead", "Leadership & Strategy"],
+    ["re", "Real Estate & Development"],
+    ["global", "Global Perspectives"],
   ];
 
   /* ---- Courses ---- */
   const COURSES = [
-    ["edu", "EDG 2021", "Critical Issues in Education", ["teach"], "Explores the broad field of education in a variety of traditional and nontraditional contexts. Introduces enduring issues in educational systems in the US and examines organizations and career fields focused on addressing these issues."],
-    ["edu", "EEX 4294", "Differentiated Instruction", ["teach", "incl"], "Provides pre-service teachers with information and expertise related to instruction that effectively meets the academic needs of all students."],
-    ["edu", "TSL 3323", "ESOL and Reading for Teachers", ["teach", "incl"], "Develop an understanding of literacy teaching and learning, with a dual focus on native speakers of English and English language learners; focuses on methods and materials used to support the development of proficient and critical adolescent readers in academic content areas."],
-    ["edu", "EDF 3210", "Educational Psychology", ["teach"], "Introduces the application of psychology to the problems of education in a variety of educational settings. Also examines the theoretical and applied aspects of learning, motivation, human development, personality, and measurement and evaluation."],
-    ["edu", "EEX 3093", "Exceptional People: School and Society", ["incl"], "Persons with disabilities and people from other diverse groups and the services they need from school and society for success. Consideration of the abilities, causes, and educational implications."],
-    ["edu", "EME 4406", "Integrating Technology into the Secondary Curriculum", ["tech", "teach"], "Gain experience with curriculum design and course development, which assumes use of technology."],
-    ["edu", "EME 2040", "Introduction to Educational Technology", ["tech"], "Introduces computer productivity (word processing, databases, spreadsheets, painting, drawing, layouts); multimedia (media design, digital video, presentation); communications (internet, Eric); educational software (computer-aided instruction, public domain software); interactive media (linked environments, one-to-many, presentations using electronic tools); reference materials (electronic encyclopedia, atlases, clip art, libraries, internet); instructional applications (techniques); and ethical."],
-    ["edu", "EDF 4430", "Measurement and Evaluation in Education", ["teach", "quant"], "Basic principles and methods of measurement, evaluation, and test construction."],
-    ["edu", "EDF 3604", "Social Foundations of Education", ["teach"], "Educative effects of social structures and social values and the issues involved in appraising these effects, including the resulting social demands upon schools."],
-    ["edu", "EDF 2085", "Teaching Diverse Populations", ["teach", "incl"], "Surveys educational demographics, foundations of prejudice, elements of culture, political and philosophical roots of diversity and commonality, exceptionalities, and barriers to cultural understanding and diversity in the classroom."],
-    ["edu", "EME 3813", "Technology Enhanced Learning Environments", ["tech", "teach"], "Analyzes how people learn in technology-enhanced environments, outlines how the design of technology-enhanced systems can support or undermine learning, and considers critical issues for instructors, designers, and learners in the digital age."],
-    ["biz", "ENT 4934", "Business Plan Lab", ["ent"], "Special topics in entrepreneurship-related fields of study."],
-    ["biz", "ACG 2021", "Financial Accounting", ["fin"], "Conceptual introduction to financial accounting. Emphasis is placed on wealth and income measurement and the preparation and interpretation of conventional financial statements."],
-    ["biz", "GEB 3373", "International Business", ["mgmt", "global"], "Exposes the business environments (culture, politics, laws and economics) encountered in other parts of the world; to the tools and skills necessary to analyze the potential of other countries as locations for production, distribution and marketing; to how managing and integrating international operations in many parts of the world differs from the domestic focus of many business courses; and to the broad perspective required of successful managers working in international business."],
-    ["biz", "MAN 4504", "Operations and Supply Chain Management", ["mgmt"], "Managerial concepts and quantitative tools required in the design, operation, and control of production systems and their relationship to business functions."],
-    ["biz", "ECO 2013", "Principles of Macroeconomics", ["fin"], "In this course, students will learn the foundations of macroeconomics as the branch of economics concerned with how decision-making, in an environment of scarcity, maps onto the aggregate economy. Students will examine theories and evidence related to the following core set of topics: national income determination, money, monetary and fiscal policy, macroeconomic conditions, international trade and the balance of payments, and economic growth and development."],
-    ["biz", "MAN 3025", "Principles of Management", ["mgmt"], "Fundamentals of management underlying the solution of problems of organization and operation of business enterprises."],
-    ["biz", "ECO 2023", "Principles of Microeconomics", ["fin"], "Theories of production, determination of prices and distribution of income in regulated and unregulated industries. Attention is also given to industrial relations, monopolies and comparative economic systems."],
-    ["biz", "GEB 3213", "Professional Writing in Business", ["mgmt"], "Teaches business students fundamental written communication skills focusing on those areas central to professional writing in business."],
-    ["biz", "REE 3043", "Real Estate Analysis", ["re", "fin"], "Principles of real estate decision making within the context of our economic, social, legal and political-government systems."],
-    ["biz", "ENT 4934", "Start Up Funding", ["ent", "fin"], "Special topics in entrepreneurship-related fields of study."],
+    ["edu", "EDG 2021", "Critical Issues in Education", ["comm", "incl"], "Explores the broad field of education in a variety of traditional and nontraditional contexts. Introduces enduring issues in educational systems in the US and examines organizations and career fields focused on addressing these issues."],
+    ["edu", "EEX 4294", "Differentiated Instruction", ["incl"], "Provides pre-service teachers with information and expertise related to instruction that effectively meets the academic needs of all students."],
+    ["edu", "TSL 3323", "ESOL and Reading for Teachers", ["incl", "comm"], "Develop an understanding of literacy teaching and learning, with a dual focus on native speakers of English and English language learners; focuses on methods and materials used to support the development of proficient and critical adolescent readers in academic content areas."],
+    ["edu", "EDF 3210", "Educational Psychology", ["incl"], "Introduces the application of psychology to the problems of education in a variety of educational settings. Also examines the theoretical and applied aspects of learning, motivation, human development, personality, and measurement and evaluation."],
+    ["edu", "EEX 3093", "Exceptional People: School and Society", ["incl", "global"], "Persons with disabilities and people from other diverse groups and the services they need from school and society for success. Consideration of the abilities, causes, and educational implications."],
+    ["edu", "EME 4406", "Integrating Technology into the Secondary Curriculum", ["edtech"], "Gain experience with curriculum design and course development, which assumes use of technology."],
+    ["edu", "EME 2040", "Introduction to Educational Technology", ["edtech"], "Introduces computer productivity (word processing, databases, spreadsheets, painting, drawing, layouts); multimedia (media design, digital video, presentation); communications (internet, Eric); educational software (computer-aided instruction, public domain software); interactive media (linked environments, one-to-many, presentations using electronic tools); reference materials (electronic encyclopedia, atlases, clip art, libraries, internet); instructional applications (techniques); and ethical."],
+    ["edu", "EDF 4430", "Measurement and Evaluation in Education", ["quant"], "Basic principles and methods of measurement, evaluation, and test construction."],
+    ["edu", "EDF 3604", "Social Foundations of Education", ["comm", "global"], "Educative effects of social structures and social values and the issues involved in appraising these effects, including the resulting social demands upon schools."],
+    ["edu", "EDF 2085", "Teaching Diverse Populations", ["incl", "global"], "Surveys educational demographics, foundations of prejudice, elements of culture, political and philosophical roots of diversity and commonality, exceptionalities, and barriers to cultural understanding and diversity in the classroom."],
+    ["edu", "EME 3813", "Technology Enhanced Learning Environments", ["edtech"], "Analyzes how people learn in technology-enhanced environments, outlines how the design of technology-enhanced systems can support or undermine learning, and considers critical issues for instructors, designers, and learners in the digital age."],
+    ["biz", "ENT 4934", "Business Plan Lab", ["lead", "quant"], "Special topics in entrepreneurship-related fields of study."],
+    ["biz", "ENT 3003", "Principles of Entrepreneurship", ["lead"], "Practical hands-on understanding of the stages of entrepreneurial process. Focus on the decision-making process within a start-up company."],
+    ["biz", "ACG 2021", "Financial Accounting", ["quant"], "Conceptual introduction to financial accounting. Emphasis is placed on wealth and income measurement and the preparation and interpretation of conventional financial statements."],
+    ["biz", "GEB 3373", "International Business", ["global", "lead"], "Exposes the business environments (culture, politics, laws and economics) encountered in other parts of the world; to the tools and skills necessary to analyze the potential of other countries as locations for production, distribution and marketing; to how managing and integrating international operations in many parts of the world differs from the domestic focus of many business courses; and to the broad perspective required of successful managers working in international business."],
+    ["biz", "MAN 4504", "Operations and Supply Chain Management", ["lead", "quant"], "Managerial concepts and quantitative tools required in the design, operation, and control of production systems and their relationship to business functions."],
+    ["biz", "ECO 2013", "Principles of Macroeconomics", ["quant", "global"], "In this course, students will learn the foundations of macroeconomics as the branch of economics concerned with how decision-making, in an environment of scarcity, maps onto the aggregate economy. Students will examine theories and evidence related to the following core set of topics: national income determination, money, monetary and fiscal policy, macroeconomic conditions, international trade and the balance of payments, and economic growth and development."],
+    ["biz", "MAN 3025", "Principles of Management", ["lead"], "Fundamentals of management underlying the solution of problems of organization and operation of business enterprises."],
+    ["biz", "ECO 2023", "Principles of Microeconomics", ["quant"], "Theories of production, determination of prices and distribution of income in regulated and unregulated industries. Attention is also given to industrial relations, monopolies and comparative economic systems."],
+    ["biz", "GEB 3213", "Professional Writing in Business", ["comm"], "Teaches business students fundamental written communication skills focusing on those areas central to professional writing in business."],
+    ["biz", "REE 3043", "Real Estate Analysis", ["re", "quant"], "Principles of real estate decision making within the context of our economic, social, legal and political-government systems."],
+    ["biz", "ENT 4934", "Start Up Funding", ["lead", "quant"], "Special topics in entrepreneurship-related fields of study."],
     ["biz", "QMB 3250", "Statistics for Business Decisions", ["quant"], "Correlation and linear regression, model building, multiple regression, analysis of variance, time series analysis and decision analysis. Regression modeling with computer applications for business problems."],
     ["biz", "MAC 2233", "Survey of Calculus", ["quant"], "MAC 2233 surveys the important ideas of calculus but emphasizing its applications to business, economics, life, and social sciences. The course covers important precalculus topics: basics of functions and graphing, specific functions and their applications as models (linear, quadratic, rational, exponential, and logarithmic) as well as calculus: limits, differentiation, applications of the derivative, introduction to integration, and its applications including area."],
-    ["biz", "BUL 4310", "The Legal Environment of Business", ["law"], "Introduces the legal environment of business and organizations. Emphasizes public and regulatory law and on the social, political and ethical aspects of legal issues in business. Subjects include the nature of law and legal process; administrative law of contracts and torts; business and the constitution; statutory and common law; contracts and torts; business organizations and securities, antitrust, consumer protection and employment law."],
-    ["re", "REE 6305", "Advanced Real Estate Investments", ["re", "fin"], "The course emphasizes measuring risk and rate of return under conditions of uncertainty in real estate investment decision-making. Simulation is used to face the problems of matching investment strategy to the physical property, leverage, income taxation, and organizational alternatives."],
-    ["re", "FIN 6406", "Corporate Finance", ["fin"], "This class focuses on financial decision-making and its impact on the economic value of the firm. The course provides practical applications and is based on modern financial theory, with an emphasis on valuation and risk management. The course examines valuation concepts, capital budgeting, risk analysis, and capital structure decisions in depth. It covers the ethical and financial implications of business decisions and their impact on the value of the firm."],
-    ["re", "REE 6306C", "Corporate Real Estate", ["re", "mgmt"], "This course introduces students to the end-user perspective of non-real estate companies' use of real estate. Focus is on decision-making tools and strategies to optimize performance."],
-    ["re", "REE 6327", "Global Real Estate Capital Markets", ["re", "fin", "global"], "This course is designed to provide MSIRE students with the knowledge of real estate capital markets and primarily focuses on the theory and operation of the mortgage-backed securities (MBS) and the markets for structured real estate debt, REITs and real estate equity derivatives. These markets have developed rapidly and become immensely important for both residential and commercial real estate."],
-    ["re", "REE 6715", "Real Estate Development", ["re"], "This course will provide an overview of the principles of real estate development; allow the student to obtain a foundation of knowledge in real estate development; review the primary development product types, including land, residential, multi-family, industrial, office and mixed use property types."],
-    ["re", "REE 6209", "Real Estate Finance", ["re", "fin"], "This course is an introduction to the fundamental concepts, principles, and analytical methods of real estate finance. The focus will be on commercial real estate capital markets, while we also discuss different aspects of residential real estate finance."],
-    ["re", "REE 6435", "Real Estate Law", ["re", "law"], "This course takes a creative interactive approach and provides lessons applicable all over the world about practical ways that real estate law impacts everyday life, from understanding what it means to sign a real estate contract like a residential lease or purchase contract, to understanding the process to buy real estate, to obtaining financing to purchase real estate and to growing wealth by managing your own real estate."],
+    ["biz", "BUL 4310", "The Legal Environment of Business", ["lead", "comm"], "Introduces the legal environment of business and organizations. Emphasizes public and regulatory law and on the social, political and ethical aspects of legal issues in business. Subjects include the nature of law and legal process; administrative law of contracts and torts; business and the constitution; statutory and common law; contracts and torts; business organizations and securities, antitrust, consumer protection and employment law."],
+    ["re", "REE 6305", "Advanced Real Estate Investments", ["re", "quant"], "The course emphasizes measuring risk and rate of return under conditions of uncertainty in real estate investment decision-making. Simulation is used to face the problems of matching investment strategy to the physical property, leverage, income taxation, and organizational alternatives."],
+    ["re", "FIN 6406", "Corporate Finance", ["quant", "lead"], "This class focuses on financial decision-making and its impact on the economic value of the firm. The course provides practical applications and is based on modern financial theory, with an emphasis on valuation and risk management. The course examines valuation concepts, capital budgeting, risk analysis, and capital structure decisions in depth. It covers the ethical and financial implications of business decisions and their impact on the value of the firm."],
+    ["re", "REE 6306C", "Corporate Real Estate", ["re", "lead"], "This course introduces students to the end-user perspective of non-real estate companies' use of real estate. Focus is on decision-making tools and strategies to optimize performance."],
+    ["re", "REE 6327", "Global Real Estate Capital Markets", ["re", "global", "quant"], "This course is designed to provide MSIRE students with the knowledge of real estate capital markets and primarily focuses on the theory and operation of the mortgage-backed securities (MBS) and the markets for structured real estate debt, REITs and real estate equity derivatives. These markets have developed rapidly and become immensely important for both residential and commercial real estate."],
+    ["re", "REE 6715", "Real Estate Development", ["re", "lead"], "This course will provide an overview of the principles of real estate development; allow the student to obtain a foundation of knowledge in real estate development; review the primary development product types, including land, residential, multi-family, industrial, office and mixed use property types."],
+    ["re", "REE 6209", "Real Estate Finance", ["re", "quant"], "This course is an introduction to the fundamental concepts, principles, and analytical methods of real estate finance. The focus will be on commercial real estate capital markets, while we also discuss different aspects of residential real estate finance."],
+    ["re", "REE 6435", "Real Estate Law", ["re", "comm"], "This course takes a creative interactive approach and provides lessons applicable all over the world about practical ways that real estate law impacts everyday life, from understanding what it means to sign a real estate contract like a residential lease or purchase contract, to understanding the process to buy real estate, to obtaining financing to purchase real estate and to growing wealth by managing your own real estate."],
     ["re", "REE 6147", "Real Estate Market Analysis", ["re", "quant"], "This course provides an overview of basic theories and principles related to real estate market analysis. It gives a hands-on introduction to the industry-standard cash flow software (ARGUS) to assess risks and returns for income-producing real estate assets. Students will also learn how to use relevant data to conduct market research."],
-    ["re", "REE 6045", "Real Estate Markets, Institutions and Practices", ["re"], "This course is designed to introduce the student to the nature, principles, and advanced fundamental and analytical practices of the real estate industry."],
+    ["re", "REE 6045", "Real Estate Markets, Institutions and Practices", ["re", "global"], "This course is designed to introduce the student to the nature, principles, and advanced fundamental and analytical practices of the real estate industry."],
     ["re", "REE 6935", "Seminar in International Real Estate", ["re", "global"], "Current trends and issues affecting industrial real estate on an international level. Topics include: the multinational corporation and its location decisions; foreign taxation; international trade and exchange rates."],
   ];
 
   /* ---------------------------------------------------------------- */
 
-  const LEVEL_NAMES = ["Lower-division", "Upper-division", "Graduate"];
   const progById = Object.fromEntries(PROGRAMS.map((p) => [p.id, p]));
   const topicName = Object.fromEntries(TOPICS);
-  // Level comes from the course number: 1000-2000s, 3000-4000s, 5000+ (graduate)
-  const levelOf = (code) => { const n = parseInt((code.match(/\d{4}/) || ["2000"])[0], 10); return n >= 5000 ? 3 : n >= 3000 ? 2 : 1; };
   const courses = COURSES.map(([prog, code, name, tags, desc], i) => ({
-    id: "c" + i, prog, code, name, tags, desc, level: levelOf(code),
+    id: "c" + i, prog, code, name, tags, desc,
     hay: [name, code, desc, progById[prog].school, progById[prog].degree, ...tags.map((t) => topicName[t])].join(" ").toLowerCase(),
   }));
   const byId = new Map(courses.map((c) => [c.id, c]));
@@ -87,7 +82,6 @@
     const re = new RegExp("(" + ts.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|") + ")", "gi");
     return text.split(re).map((seg, i) => (i % 2 ? `<mark>${esc(seg)}</mark>` : esc(seg))).join("");
   };
-  const pips = (l) => `<span class="cx-lvl l${l}" role="img" aria-label="${LEVEL_NAMES[l - 1]}"><i></i><i></i><i></i></span>`;
 
   const svg = (d, extra = "") => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${extra}>${d}</svg>`;
   const ICON = {
@@ -109,8 +103,6 @@
         <label class="cx-sort"><span>Sort</span><select aria-label="Sort courses">
           <option value="az">Name, A to Z</option>
           <option value="code">Course code</option>
-          <option value="up">Level, lowest first</option>
-          <option value="down">Level, highest first</option>
         </select></label>
         <label class="cx-switch"><input type="checkbox" checked><span class="cx-track"></span>Group by program</label>
       </div>
@@ -120,7 +112,6 @@
     <div class="cx-meta">
       <p class="cx-count" aria-live="polite"></p>
       <div class="cx-actions">
-        <span class="cx-legend">Level ${pips(1)} lower ${pips(2)} upper ${pips(3)} graduate</span>
         <button type="button" class="cx-link" data-clear hidden>Clear filters</button>
         <button type="button" class="cx-link" data-surprise>${ICON.shuffle} Surprise me</button>
       </div>
@@ -132,7 +123,7 @@
   <dialog class="cx-dialog" aria-labelledby="cx-title">
     <div class="cx-card">
       <button type="button" class="cx-x" aria-label="Close">${ICON.x}</button>
-      <p class="cx-d-top"><span class="cx-d-code"></span><span class="cx-lvl-name"></span></p>
+      <p class="cx-d-top"><span class="cx-d-code"></span></p>
       <h3 id="cx-title"></h3>
       <p class="cx-d-where"></p>
       <div class="cx-d-tags"></div>
@@ -154,7 +145,7 @@
   const chip = (cls, attr, html) => { const b = document.createElement("button"); b.type = "button"; b.className = cls; b.setAttribute(...attr); b.setAttribute("aria-pressed", "false"); b.innerHTML = html; return b; };
   const progChips = new Map(), topicChips = new Map();
   PROGRAMS.forEach((p) => { const b = chip(`cx-chip p-${p.id}`, ["data-prog", p.id], `<span class="cx-dot"></span>${p.short}<span class="n"></span>`); progChips.set(p.id, b); progBox.append(b); });
-  TOPICS.forEach(([id, label]) => { const b = chip("cx-chip t", ["data-topic", id], `${label}<span class="n"></span>`); topicChips.set(id, b); topicBox.append(b); });
+  TOPICS.forEach(([id, label]) => { const b = chip("cx-chip t", ["data-topic", id], `${esc(label)}<span class="n"></span>`); topicChips.set(id, b); topicBox.append(b); });
 
   /* ---- Program blocks ---- */
   const groups = {};
@@ -172,7 +163,7 @@
   courses.forEach((c) => {
     const b = document.createElement("button");
     b.type = "button"; b.className = `cx-tile p-${c.prog}`; b.dataset.id = c.id;
-    b.innerHTML = `<span class="cx-code"></span><span class="cx-name"></span><span class="cx-hint" hidden>Found in description or topics</span><span class="cx-foot"><span>${pips(c.level)} ${LEVEL_NAMES[c.level - 1]}</span><span class="cx-pl"><span class="cx-dot"></span>${progById[c.prog].short}</span></span>`;
+    b.innerHTML = `<span class="cx-code"></span><span class="cx-name"></span><span class="cx-hint" hidden>Found in description or topics</span><span class="cx-foot"><span class="cx-pl"><span class="cx-dot"></span>${progById[c.prog].short}</span></span>`;
     b.addEventListener("animationend", () => b.classList.remove("cx-in"));
     b.addEventListener("click", () => openCard(c.id));
     tiles.set(c.id, b);
@@ -183,8 +174,6 @@
   const sorters = {
     az: byName,
     code: (a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }) || byName(a, b),
-    up: (a, b) => a.level - b.level || byName(a, b),
-    down: (a, b) => b.level - a.level || byName(a, b),
   };
   const matches = (c, ts, skip) =>
     (skip === "prog" || state.progs.has(c.prog)) &&
@@ -301,10 +290,9 @@
     const p = progById[c.prog], ts = terms();
     card.className = `cx-card p-${c.prog}`;
     $(".cx-d-code", card).innerHTML = mark(c.code, ts);
-    $(".cx-lvl-name", card).innerHTML = `${pips(c.level)} ${LEVEL_NAMES[c.level - 1]}`;
     $("#cx-title", card).innerHTML = mark(c.name, ts);
     $(".cx-d-where", card).textContent = `${p.school} · ${p.degree}`;
-    $(".cx-d-tags", card).innerHTML = c.tags.map((t) => `<button type="button" data-topic="${t}" title="Show all ${topicName[t]} courses">${topicName[t]}</button>`).join("");
+    $(".cx-d-tags", card).innerHTML = c.tags.map((t) => `<button type="button" data-topic="${t}" title="Show all ${esc(topicName[t])} courses">${esc(topicName[t])}</button>`).join("");
     $(".cx-desc", card).innerHTML = mark(c.desc, ts);
     $(".cx-desc", card).scrollTop = 0;
     const idx = order.indexOf(id);
