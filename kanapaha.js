@@ -157,3 +157,49 @@ document.querySelectorAll("[data-viewer]").forEach((v) => {
   setPlaying(playing);
   next();
 })();
+
+// Certifications: count up to 150 while 150 dots light up, then check off each certification.
+(() => {
+  const sec = document.querySelector(".kp-certs");
+  if (!sec) return;
+  const num = sec.querySelector("[data-count]");
+  const dotsBox = sec.querySelector("[data-dots]");
+  const target = +num.dataset.count;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Build the dots
+  const dots = [];
+  for (let i = 0; i < target; i++) {
+    const d = document.createElement("i");
+    d.style.setProperty("--d", i % 30 + Math.floor(i / 30));
+    dotsBox.appendChild(d);
+    dots.push(d);
+  }
+  const light = (n) => dots.forEach((d, i) => d.classList.toggle("on", i < n));
+  sec.querySelectorAll(".kp-apps li").forEach((li, i) => li.style.setProperty("--j", i));
+
+  // Reduced motion or no observer: show the finished state, no animation
+  if (reduce || !("IntersectionObserver" in window)) { light(target); return; }
+
+  sec.classList.add("anim-ready");
+  num.textContent = "0";
+
+  function run() {
+    sec.classList.add("in");
+    const dur = 1900, t0 = performance.now();
+    let shown = 0;
+    (function tick(now) {
+      const p = Math.min(1, (now - t0) / dur);
+      const e = 1 - Math.pow(1 - p, 3);          // ease out
+      const n = Math.round(e * target);
+      if (n !== shown) { shown = n; num.textContent = n; light(n); }
+      if (p < 1) requestAnimationFrame(tick);
+      else setTimeout(() => dotsBox.classList.add("wave"), 150);
+    })(t0);
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    if (entries.some((x) => x.isIntersecting)) { io.disconnect(); run(); }
+  }, { threshold: 0.3 });
+  io.observe(sec);
+})();
