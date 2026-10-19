@@ -339,3 +339,135 @@ nav .dd ul a{display:block;padding:9px 16px}
 .fsa-read{min-height:1.7em;margin-top:10px;font:700 1rem var(--head);color:var(--pencil)}
 @media (max-width:820px){.fsa-viewer .sc-toggle{margin-left:0}.hot-lab{font-size:26px}}
 @media (prefers-reduced-motion:reduce){#fsa-hot{animation:none}.fsa-svg .dim,#fsa-cluster,.lab2,.person{transition:none}.fsa-svg[data-stage="3"] .pop{transition:none}}
+
+/* =====================================================================
+   SITE-WIDE POLISH (added): mobile menu, progress bar, back to top,
+   footer extras, page pager, hover/press feedback, print styles
+   ===================================================================== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:clip}
+::selection{background:var(--pencil);color:var(--ink)}
+a,button{-webkit-tap-highlight-color:transparent}
+button{font-family:inherit}
+main:focus{outline:none}
+.job[hidden]{display:none}
+.crumb{padding:6px 0}
+
+/* Skip link for keyboard users */
+.skip{position:absolute;left:12px;top:-64px;z-index:20;background:var(--ink);color:#fff;padding:10px 16px;border-radius:4px;font:700 .95rem var(--head);text-decoration:none;transition:top .15s}
+.skip:focus{top:12px}
+
+/* Hover and press feedback */
+.btn{transition:background-color .15s,color .15s,transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(20,40,58,.16)}
+.btn:active{transform:none;box-shadow:none}
+.more{transition:text-decoration-thickness .15s}
+.more:hover{text-decoration-thickness:5px}
+.v-tabs button,.sc-toggle{transition:background-color .15s,color .15s,border-color .15s}
+
+/* Reading progress bar along the bottom of the header */
+.read{position:absolute;left:0;right:0;bottom:-1px;height:3px;pointer-events:none}
+.read i{display:block;height:100%;background:var(--pencil);transform:scaleX(var(--p,0));transform-origin:left}
+
+/* Menu button (phones and small tablets) */
+.nav-toggle{display:none;align-items:center;gap:10px;min-height:44px;padding:0 14px;background:none;border:2px solid var(--ink);border-radius:4px;color:var(--ink);font:700 .95rem var(--head);cursor:pointer}
+.nav-ico{position:relative;display:inline-block;width:18px;height:14px}
+.nav-ico i{position:absolute;left:0;width:100%;height:2px;background:currentColor;border-radius:1px;transition:transform .2s,opacity .2s,top .2s}
+.nav-ico i:nth-child(1){top:0}.nav-ico i:nth-child(2){top:6px}.nav-ico i:nth-child(3){top:12px}
+.menu-open .nav-ico i:nth-child(1){top:6px;transform:rotate(45deg)}
+.menu-open .nav-ico i:nth-child(2){opacity:0}
+.menu-open .nav-ico i:nth-child(3){top:6px;transform:rotate(-45deg)}
+nav .dd:has(:focus-visible) ul{display:flex}
+@keyframes menuin{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+@media (max-width:900px){
+  nav.wrap{flex-wrap:nowrap}
+  .logo{display:block}
+  .nav-toggle{display:inline-flex}
+  nav>ul{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;flex-wrap:nowrap;justify-content:flex-start;gap:0;row-gap:0;padding:4px 24px 18px;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 14px 24px rgba(20,40,58,.14);max-height:calc(100vh - 64px);max-height:calc(100dvh - 64px);overflow-y:auto}
+  header.menu-open nav>ul{display:flex;animation:menuin .2s ease}
+  nav>ul>li{border-bottom:1px solid var(--line)}
+  nav>ul>li:last-child{border-bottom:0}
+  nav>ul a,.dd>button{display:flex;align-items:center;width:100%;min-height:50px;font-size:1.05rem;text-align:left}
+  .dd>button{justify-content:space-between}
+  nav .dd ul{position:static;display:none;min-width:0;padding:0 0 8px 16px;border:0;border-radius:0;box-shadow:none;background:none}
+  nav .dd.open ul{display:flex}
+  nav .dd:not(.open) ul{display:none!important}
+  nav .dd ul a{min-height:46px;padding:0;font-size:1rem}
+}
+
+/* Back to top */
+.to-top{position:fixed;right:16px;bottom:16px;z-index:4;width:44px;height:44px;border-radius:50%;background:var(--white);border:3px solid var(--pencil);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 10px rgba(20,40,58,.25);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .2s,transform .2s,visibility 0s .2s}
+.to-top.show{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.to-top:hover{background:var(--pencil)}
+
+/* "Copied" message */
+.toast{position:fixed;left:50%;bottom:24px;z-index:30;transform:translate(-50%,16px);background:var(--ink);color:#fff;font:700 .95rem var(--head);padding:10px 18px;border-radius:99px;opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility 0s .2s;pointer-events:none;max-width:calc(100vw - 32px)}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
+
+/* Footer */
+.contact .mail{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+.copy-btn{font:700 .85rem var(--head);background:none;color:#fff;border:2px solid rgba(255,255,255,.55);border-radius:99px;padding:6px 16px;min-height:40px;cursor:pointer;transition:background-color .15s,border-color .15s,color .15s}
+.copy-btn:hover{background:rgba(255,255,255,.12);border-color:#fff}
+.copy-btn.done{background:var(--pencil);border-color:var(--pencil);color:var(--ink)}
+.contact p a:not(.big){display:inline-block;padding:6px 0}
+.foot-links{display:flex;flex-wrap:wrap;gap:0 24px;list-style:none;padding:0;margin:32px 0 0}
+.foot-links li{margin:0}
+.foot-links a{display:inline-block;padding:8px 0;font:600 .9rem var(--head);color:#C9D9E4;text-decoration:none}
+.foot-links a:hover{color:#fff;text-decoration:underline;text-decoration-color:var(--pencil);text-decoration-thickness:2px;text-underline-offset:4px}
+.contact small{margin-top:20px}
+
+/* Previous / next page links */
+.pager-sec{padding:8px 0 72px}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:20px;border-top:1px solid var(--line);padding-top:32px}
+.pager a{display:block;text-decoration:none;border:2px solid var(--ink);border-radius:6px;padding:16px 20px;background:var(--white);transition:background-color .15s,transform .15s,box-shadow .15s}
+.pager a:hover{background:var(--sky);transform:translateY(-2px);box-shadow:0 6px 14px rgba(20,40,58,.12)}
+.pager small{display:block;font:600 .8rem var(--head);color:var(--ink2)}
+.pager b{display:block;font:700 1.15rem var(--head)}
+.pager .prev{grid-column:1}
+.pager .next{grid-column:2;text-align:right}
+
+/* Resume filter */
+.rs-filter{margin:0 0 6px}
+.rs-note{font:600 .85rem var(--head);color:var(--ink2);margin:12px 0 0}
+
+/* Phones */
+@media (max-width:820px){
+  .v-tabs button{min-height:44px}
+  .sc-toggle{min-height:40px}
+  .pager{grid-template-columns:1fr}
+  .pager .prev,.pager .next{grid-column:1;text-align:left}
+  .to-top{right:12px;bottom:12px}
+}
+@media (max-width:560px){
+  body{font-size:17px}
+  .wrap{padding:0 20px}
+  .page-head{padding:40px 0 16px}
+  .contact{padding:56px 0 24px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .btn,.pager a,.to-top,.toast,.nav-ico i{transition:none}
+  .btn:hover,.pager a:hover{transform:none}
+  header.menu-open nav>ul{animation:none}
+}
+
+/* Printing (handy for the resume page) */
+@media print{
+  header,.skip,.to-top,.toast,.pager-sec,.btns,.tl-section,.rs-filter,.copy-btn,.foot-links{display:none!important}
+  body{background:#fff;font-size:11.5pt}
+  section{padding:16px 0}
+  .job{break-inside:avoid}
+  .contact{background:#fff;color:var(--ink);padding:16px 0}
+  .contact h2,.contact a.big{color:var(--ink)}
+  a{text-decoration:none}
+}
+
+/* Menu polish: no stuck hover underline on touch, arrow flips when open */
+.dd>button span{display:inline-block;transition:transform .2s}
+.dd.open>button span{transform:rotate(180deg)}
+@media (max-width:900px){
+  .dd>button:hover:not([aria-current]){text-decoration:none}
+  .dd>button{text-underline-offset:6px}
+}
+@media (prefers-reduced-motion:reduce){.dd>button span{transition:none}}

@@ -157,4 +157,19 @@
       });
     });
   }
+
+  /* =====================================================
+     3. STUDENTS OF EVERY AGE: bars rise once when scrolled into view
+     ===================================================== */
+  const ages = document.querySelector("[data-ages]");
+  if (ages) {
+    ages.classList.add("js");
+    if (reduced || !("IntersectionObserver" in window)) {
+      ages.classList.add("in");
+    } else {
+      new IntersectionObserver((entries, obs) => {
+        if (entries.some((e) => e.isIntersecting)) { ages.classList.add("in"); obs.disconnect(); }
+      }, { threshold: 0.35 }).observe(ages);
+    }
+  }
 })();

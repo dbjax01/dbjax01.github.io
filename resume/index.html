@@ -73,7 +73,17 @@
 <section style="padding-top:20px">
 <div class="wrap">
 
-  <div class="job">
+  <div class="viewer on-light rs-filter" id="rsFilter" hidden>
+    <div class="v-tabs" role="group" aria-label="Filter the resume">
+      <button type="button" data-f="all" aria-pressed="true">All</button>
+      <button type="button" data-f="teach" aria-pressed="false">Teaching and tutoring</button>
+      <button type="button" data-f="edu" aria-pressed="false">Education</button>
+      <button type="button" data-f="biz" aria-pressed="false">Business</button>
+    </div>
+    <p class="rs-note" role="status" id="rsNote"></p>
+  </div>
+
+  <div class="job" data-cat="teach biz">
     <time>Apr. 2026 to present</time>
     <div>
       <h3>Community Economic Development Volunteer</h3>
@@ -82,7 +92,7 @@
     </div>
   </div>
 
-  <div class="job">
+  <div class="job" data-cat="teach">
     <time>Dec. 2024 to Feb. 2026</time>
     <div>
       <h3>Math and Science Instructor</h3>
@@ -91,7 +101,7 @@
     </div>
   </div>
 
-  <div class="job">
+  <div class="job" data-cat="teach">
     <time>Apr. 2025 to Feb. 2026</time>
     <div>
       <h3>Business Tutor</h3>
@@ -100,7 +110,7 @@
     </div>
   </div>
 
-  <div class="job">
+  <div class="job" data-cat="teach">
     <time>Aug. 2023 to May 2024</time>
     <div>
       <h3>Career and Technical Education Teacher</h3>
@@ -109,7 +119,16 @@
     </div>
   </div>
 
-  <div class="job">
+  <div class="job" id="terwilliger" data-cat="teach">
+    <time>Jan. 2023 to Apr. 2023</time>
+    <div>
+      <h3>After-School Reading Tutor</h3>
+      <p class="where">Terwilliger Elementary School, Alachua County Public Schools</p>
+      <p>Transported high school students to Terwilliger Elementary School in Gainesville and helped facilitate their one-on-one after-school tutoring sessions with elementary students who had low reading skills, supporting growth in reading comprehension.</p>
+    </div>
+  </div>
+
+  <div class="job" data-cat="teach">
     <time>Aug. 2022 to May 2023</time>
     <div>
       <h3>Paraprofessional</h3>
@@ -118,7 +137,7 @@
     </div>
   </div>
 
-  <div class="job">
+  <div class="job" data-cat="other">
     <time>Sep. 2018 to Dec. 2025</time>
     <div>
       <h3>Grocery Clerk</h3>
@@ -127,7 +146,7 @@
     </div>
   </div>
 
-  <div class="job">
+  <div class="job" data-cat="edu">
     <time>Education</time>
     <div>
       <h3>M.S. International Real Estate</h3>
@@ -137,7 +156,7 @@
     </div>
   </div>
 
-  <div class="job">
+  <div class="job" data-cat="edu">
     <time>Certifications</time>
     <div>
       <h3>Florida Professional Educator's Certificate</h3>
@@ -149,7 +168,7 @@
     </div>
   </div>
 
-  <div class="job">
+  <div class="job" data-cat="biz">
     <time>Sep. 2020</time>
     <div>
       <h3>Flo-Fly: Co-Founder and Finalist</h3>
@@ -157,7 +176,7 @@
     </div>
   </div>
 
-  <div class="job">
+  <div class="job" data-cat="all">
     <time>Skills</time>
     <div>
       <p>Curriculum development, project management, business development, Excel, Premiere Pro, Illustrator, Photoshop, drone videography, Spanish.</p>
@@ -169,6 +188,34 @@
 
 </main>
 
+
+<!-- RESUME FILTER -->
+<script>
+(function () {
+  var box = document.getElementById('rsFilter');
+  if (!box) return;
+  var jobs = [].slice.call(document.querySelectorAll('.job[data-cat]'));
+  var btns = [].slice.call(box.querySelectorAll('button'));
+  var note = document.getElementById('rsNote');
+  var total = jobs.filter(function (j) { return j.dataset.cat !== 'all'; }).length;
+  box.hidden = false;   // the filter only appears when JavaScript works
+  function apply(f) {
+    var shown = 0;
+    jobs.forEach(function (j) {
+      var cats = j.dataset.cat.split(' ');
+      var show = f === 'all' || cats.indexOf('all') > -1 || cats.indexOf(f) > -1;
+      j.hidden = !show;
+      if (show && cats.indexOf('all') === -1) shown++;
+    });
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.f === f); });
+    note.textContent = f === 'all' ? '' : 'Showing ' + shown + ' of ' + total + ' entries';
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.f); }); });
+  // Linking straight to an entry (for example /resume/#terwilliger) always shows everything
+  if (location.hash) { var t = document.querySelector(location.hash); if (t) setTimeout(function () { t.scrollIntoView(); }, 50); }
+})();
+</script>
+
 <!-- TIMELINE SCRIPT -->
 <script>
 (function () {
@@ -179,6 +226,7 @@
     { k: 'edu',  t: 'M.S. International Real Estate', o: 'Florida International University', s: '2023-08-21', e: '2024-08-08', h: '/education/' },
     { k: 'work', t: 'Grocery Clerk', o: 'Publix Supermarkets', s: '2018-09-15', e: '2025-12-21' },
     { k: 'work', t: 'Paraprofessional', o: 'Buchholz High School', s: '2022-08-22', e: '2023-05-31' },
+    { k: 'work', t: 'Reading Tutor', o: 'Terwilliger Elementary', s: '2023-01-09', e: '2023-04-28' },
     { k: 'work', t: 'CTE Teacher', o: 'Kanapaha Middle School', s: '2023-08-01', e: '2024-05-31', h: '/kanapaha/' },
     { k: 'work', t: 'Math and Science Instructor', o: 'Florida Virtual School', s: '2024-12-02', e: '2026-02-13', h: '/fsa/' },
     { k: 'work', t: 'Business Tutor', o: 'Santa Fe College', s: '2025-05-01', e: '2026-02-09' },
