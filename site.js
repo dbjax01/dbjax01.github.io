@@ -60,7 +60,7 @@ document.body.insertAdjacentHTML("beforeend",
   `<p class="mail"><a class="big" href="mailto:${EMAIL}">${EMAIL}</a><button type="button" class="copy-btn" data-copy="${EMAIL}">Copy email</button></p>` +
   `<p><a href="https://www.linkedin.com/in/dbj01/">linkedin.com/in/dbj01</a></p>` +
   `<ul class="foot-links"><li><a href="/">Home</a></li><li><a href="/resume/">Resume</a></li><li><a href="/goals/">Career Goals</a></li><li><a href="/peace_corps/">Peace Corps</a></li></ul>` +
-  `<small>&copy; ${new Date().getFullYear()} David Jackson</small></div></footer>` +
+  `</div></footer>` +
   `<button type="button" class="to-top" aria-label="Back to top"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 15l7-7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>` +
   `<div class="toast" role="status" aria-live="polite"></div>`);
 
