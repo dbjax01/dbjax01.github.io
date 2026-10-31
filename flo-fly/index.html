@@ -52,12 +52,11 @@
 <section class="page-head">
   <div class="wrap">
     <a class="crumb" href="/">Home</a>
-    <h1>Flo-Fly: a business I built in college</h1>
+    <h1>Flo-Fly: a business I started in college</h1>
     <p class="lede">
       Flo-Fly is an online marketplace I co-founded at the University of Florida to connect drone pilots with people who need aerial photography.
-      I helped build the website, wrote the business plan, and registered the company. We placed 4th in the UF Big Idea competition.
+      I built the first version of the website and wrote the business plan, and together we registered the company as a Florida LLC. We were finalists in the UF Big Idea competition. Flo-Fly does not currently generate revenue, but it remains a registered Florida LLC.
     </p>
-    <p class="todo">Add the current status of Flo-Fly (active, paused, or closed) and a link to the website if it is still live.</p>
   </div>
 </section>
 
@@ -65,12 +64,12 @@
   <div class="wrap">
     <div class="creds">
       <div class="cred">
-        <p class="stat">4th place</p>
+        <p class="stat">Finalist</p>
         <small>UF Big Idea business plan competition, 2022</small>
       </div>
       <div class="cred">
-        <p class="stat">Under $300</p>
-        <small>total to build the first website and register the LLC</small>
+        <p class="stat">Florida LLC</p>
+        <small>the registered company behind Flo-Fly</small>
       </div>
       <div class="cred">
         <p class="stat">2 founders</p>
@@ -87,7 +86,7 @@
       <p>
         Owning a drone has never been easier, but earning money with one is still hard.
         New pilots have to build a website, start a company, and find clients on their own.
-        Clients, meanwhile, search company by company and often pay hundreds of dollars for a service, while the pilots doing the work earn a small share of that.
+        Clients, meanwhile, search company by company and often pay hundreds of dollars for a service, while the pilots doing the work earn only $20 to $30 an hour.
       </p>
       <h2 style="margin-top:36px">The idea</h2>
       <p>
@@ -134,13 +133,13 @@
       <article class="card">
         <h3>Built the product</h3>
         <p>
-          Created the first working version of the website, with pilot and client sign-ups, profiles, booking, messaging, and secure payments through Stripe.
+          Built the minimum viable product: a working website with pilot and client sign-ups, profiles, booking, and messaging. I used the Stripe API so payments move between clients and pilots directly through the site.
         </p>
       </article>
       <article class="card">
         <h3>Set up the company</h3>
         <p>
-          Registered Flo-Fly as a Florida LLC and wrote a full business plan covering the market, competition, marketing, operations, and finances.
+          Together we registered Flo-Fly as a Florida LLC, and I wrote a full business plan covering the market, competition, marketing, operations, and finances.
         </p>
       </article>
       <article class="card">
@@ -165,7 +164,7 @@
     <div class="prose">
       <h2>The UF Big Idea competition</h2>
       <p>
-        I entered Flo-Fly in the University of Florida's Big Idea business plan competition and placed 4th.
+        We entered Flo-Fly in the University of Florida's Big Idea business plan competition and reached the finals.
         Presenting to judges meant defending every assumption, from pricing to marketing costs, and explaining the business clearly in a short time.
       </p>
       <h2 style="margin-top:36px">Why it matters for teaching</h2>
@@ -174,7 +173,7 @@
         testing an idea cheaply, reading a budget, researching customers, and presenting a plan to people who ask hard questions.
         It is also why I believe student entrepreneurship projects belong in a financial literacy classroom.
       </p>
-      <p class="todo">Edit the teaching paragraph so it sounds like you, and add a lesson you learned from something that did not go as planned.</p>
+      <p>Flo-Fly was my second business competition. After the first, at UCF, I learned that I needed to strengthen my presentation and be ready for every question or criticism of the business. Building the product also meant learning web design, API integration, and Adobe Illustrator along the way.</p>
     </div>
     <div class="funnel">
       <div class="funnel-head">
@@ -213,7 +212,7 @@
       <div class="cred">
         <h3>The money</h3>
         <p>
-          An 18% commission, funded by $60,000 from the founders and a proposed $90,000 loan, with breakeven projected in year two.
+          An 18% commission, started with $30,000 from the two founders ($15,000 each), with breakeven projected in year one and a proposed $250,000 raise after that to grow.
         </p>
       </div>
     </div>
@@ -224,7 +223,7 @@
 
 <section class="white" id="business-plan">
   <div class="wrap">
-    <h2>The full business plan</h2>
+    <h2>The full business plan*</h2>
     <p class="lede" style="margin-top:0">
       This is the plan I submitted to the UF Big Idea competition. It scrolls on its own so you can see the whole document.
       Scroll, tap, or press a key to take over, or open it full screen.
@@ -251,6 +250,7 @@
         <div class="pdfv-pages"></div>
       </div>
     </div>
+    <p style="margin-top:14px"><small>*This plan was written in 2021, before AI writing tools were widely available.</small></p>
     <noscript><p class="todo">JavaScript is needed for the scrolling viewer. <a href="/flo-fly/flo-fly_business_plan.pdf">Open the business plan as a PDF.</a></p></noscript>
   </div>
 </section>
@@ -448,7 +448,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const STAGES = [
     [String(TOTAL), "business plans entered. One of them is ours."],
     [String(GROUPS * 4), "semifinalists, in " + GROUPS + " groups of 4."],
-    [String(GROUPS), "finalists. Flo-Fly was one of them and placed 4th."]
+    [String(GROUPS), "finalists. Flo-Fly was one of them."]
   ];
 
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;

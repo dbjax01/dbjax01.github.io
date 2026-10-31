@@ -88,7 +88,7 @@
     <div>
       <h3>Community Economic Development Volunteer</h3>
       <p class="where">Peace Corps, Peru</p>
-      <p>Teach financial education, support women's economic empowerment, and mentor youth entrepreneurs in Matara, Cajamarca. <a class="more" href="/peace_corps/">Details</a></p>
+      <p>Teach financial education and entrepreneurship in Spanish to women's groups of 17 to 18 participants, in partnership with social programs such as Cuna Más and Juntos. Support the municipality on tourism projects. <a class="more" href="/peace_corps/">Details</a></p>
     </div>
   </div>
 
@@ -106,7 +106,7 @@
     <div>
       <h3>Business Tutor</h3>
       <p class="where">Santa Fe College</p>
-      <p>Provided in-person economics and accounting tutoring to students at the Downtown Campus.</p>
+      <p>Provided in-person economics and accounting tutoring to students at Santa Fe College's Downtown Campus in Gainesville.</p>
     </div>
   </div>
 
@@ -115,7 +115,7 @@
     <div>
       <h3>Career and Technical Education Teacher</h3>
       <p class="where">Kanapaha Middle School, Alachua County Public Schools</p>
-      <p>Developed and taught an engaging middle school CTE curriculum focused on technological and financial literacy, in collaboration with the nonprofit Virtual Enterprises International. <a class="more" href="/kanapaha/">Details</a></p>
+      <p>Taught four middle school business technology courses, with financial literacy projects built in, in collaboration with the nonprofit Virtual Enterprises International. <a class="more" href="/kanapaha/">Details</a></p>
     </div>
   </div>
 
@@ -138,11 +138,11 @@
   </div>
 
   <div class="job" data-cat="other">
-    <time>Sep. 2018 to Dec. 2025</time>
+    <time>Sep. 2018 to Jan. 2026</time>
     <div>
       <h3>Grocery Clerk</h3>
       <p class="where">Publix Supermarkets</p>
-      <p>Delivered exceptional customer service by anticipating customer needs and managing time to keep workflow smooth. Named Employee of the Month in November 2020.</p>
+      <p>Delivered exceptional customer service by anticipating customer needs and managing time to keep workflow smooth.</p>
     </div>
   </div>
 
@@ -172,7 +172,7 @@
     <time>Sep. 2020</time>
     <div>
       <h3>Flo-Fly: Co-Founder and Finalist</h3>
-      <p>Co-founded an online marketplace connecting drone pilots with clients. Built the minimum viable product, developed the business plan, and registered the company as a Florida LLC. Advanced to the finals of the 2022 University of Florida Big Idea competition and placed 4th. <a class="more" href="/flo-fly/">Details</a></p>
+      <p>Co-founded an online marketplace connecting drone pilots with clients. Built the minimum viable product, including payment processing between pilots and clients through the Stripe API, and wrote the business plan. Together with my co-founder, registered the company as a Florida LLC. Advanced to the finals of the 2022 University of Florida Big Idea competition. <a class="more" href="/flo-fly/">Details</a></p>
     </div>
   </div>
 
@@ -224,7 +224,7 @@
   var ITEMS = [
     { k: 'edu',  t: 'B.A. Business Administration + B.A. Education Sciences', o: 'University of Florida', s: '2019-08-20', e: '2023-05-09', h: '/education/' },
     { k: 'edu',  t: 'M.S. International Real Estate', o: 'Florida International University', s: '2023-08-21', e: '2024-08-08', h: '/education/' },
-    { k: 'work', t: 'Grocery Clerk', o: 'Publix Supermarkets', s: '2018-09-15', e: '2025-12-21' },
+    { k: 'work', t: 'Grocery Clerk', o: 'Publix Supermarkets', s: '2018-09-15', e: '2026-01-10' },
     { k: 'work', t: 'Paraprofessional', o: 'Buchholz High School', s: '2022-08-22', e: '2023-05-31' },
     { k: 'work', t: 'CTE Teacher', o: 'Kanapaha Middle School', s: '2023-08-01', e: '2024-05-31', h: '/kanapaha/' },
     { k: 'work', t: 'Math and Science Instructor', o: 'Florida Virtual School', s: '2024-12-02', e: '2026-02-13', h: '/fsa/' },
@@ -292,7 +292,7 @@
       bar.style.left = x(s) + 'px';
       bar.style.width = Math.max(x(e) - x(s), 6) + 'px';
       bar.style.top = (baseTop + it.lane * (BAR_H + GAP)) + 'px';
-      var range = fmt(s) + ' to ' + (ongoing && it.k === 'pc' ? 'present (ends ' + fmt(e) + ')' : fmt(e));
+      var range = fmt(s) + ' to ' + (ongoing && it.k === 'pc' ? 'present' : fmt(e));
       bar.title = it.t + ', ' + it.o + ' (' + range + ')';
       var label = document.createElement('div'); label.className = 'tl-label';
       var strong = document.createElement('strong'); strong.textContent = it.t;
