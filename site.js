@@ -6,7 +6,7 @@ const dropdown = [
   ["/flo-fly/", "Flo-Fly"],
   ["/education/", "Education"]
 ];
-const after = [["/peace_corps/", "Peace Corps"], ["/goals/", "Career Goals"], ["/resume/", "Resume"]];
+const after = [["/peace_corps/", "Peace Corps"], ["/philosophy/", "Teaching Philosophy"], ["/goals/", "Career Goals"], ["/resume/", "Resume"]];
 
 // The order of the "Previous / Next" links at the bottom of each page. Home is not part of it.
 const tour = [
@@ -15,6 +15,7 @@ const tour = [
   ["/kanapaha/", "Kanapaha Middle School"],
   ["/flo-fly/", "Flo-Fly"],
   ["/education/", "Education"],
+  ["/philosophy/", "Teaching Philosophy"],
   ["/goals/", "Career Goals"],
   ["/resume/", "Resume"]
 ];
