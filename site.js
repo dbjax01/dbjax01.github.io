@@ -1,21 +1,21 @@
 // Edit the menu here once; every page updates.
-const before = [["/", "Home"]];
+const before = [["/", "Home"], ["/philosophy/", "Philosophy"]];
 const dropdown = [
+  ["/peace_corps/", "Peace Corps, Peru"],
   ["/fsa/", "Florida Scholars Academy"],
   ["/kanapaha/", "Kanapaha Middle School"],
-  ["/flo-fly/", "Flo-Fly"],
-  ["/education/", "Education"]
+  ["/flo-fly/", "Flo-Fly"]
 ];
-const after = [["/peace_corps/", "Peace Corps"], ["/philosophy/", "Teaching Philosophy"], ["/goals/", "Career Goals"], ["/resume/", "Resume"]];
+const after = [["/education/", "Education"], ["/goals/", "Career Goals"], ["/resume/", "Resume"]];
 
 // The order of the "Previous / Next" links at the bottom of each page. Home is not part of it.
 const tour = [
+  ["/philosophy/", "Teaching Philosophy"],
   ["/peace_corps/", "Peace Corps"],
   ["/fsa/", "Florida Scholars Academy"],
   ["/kanapaha/", "Kanapaha Middle School"],
   ["/flo-fly/", "Flo-Fly"],
   ["/education/", "Education"],
-  ["/philosophy/", "Teaching Philosophy"],
   ["/goals/", "Career Goals"],
   ["/resume/", "Resume"]
 ];
@@ -30,9 +30,9 @@ const inDropdown = dropdown.some(([h]) => h === here);
 
 const links =
   before.map(item).join("") +
-  `<li class="dd"><button type="button" aria-expanded="false"${inDropdown ? ' aria-current="true"' : ""}>Background <span aria-hidden="true">&#9662;</span></button><ul>${dropdown.map(item).join("")}</ul></li>` +
+  `<li class="dd"><button type="button" aria-expanded="false"${inDropdown ? ' aria-current="true"' : ""}>Experience <span aria-hidden="true">&#9662;</span></button><ul>${dropdown.map(item).join("")}</ul></li>` +
   after.map(item).join("") +
-  '<li><a href="#contact">Contact</a></li>';
+  '<li><a class="nav-cta" href="#contact">Contact</a></li>';
 
 document.head.insertAdjacentHTML("beforeend", '<meta name="theme-color" content="#F5F8F7"><link rel="icon" href="/photos/favicon.svg" type="image/svg+xml"><link rel="icon" href="/photos/favicon.ico" sizes="any">');
 
@@ -60,7 +60,7 @@ document.body.insertAdjacentHTML("beforeend",
   `<p>I'm available for secondary teaching roles after my Peace Corps service. I'd welcome a conversation with any principal or department head.</p>` +
   `<p class="mail"><a class="big" href="mailto:${EMAIL}">${EMAIL}</a><button type="button" class="copy-btn" data-copy="${EMAIL}">Copy email</button></p>` +
   `<p><a href="https://www.linkedin.com/in/dbj01/">linkedin.com/in/dbj01</a></p>` +
-  `<ul class="foot-links"><li><a href="/">Home</a></li><li><a href="/resume/">Resume</a></li><li><a href="/goals/">Career Goals</a></li><li><a href="/peace_corps/">Peace Corps</a></li></ul>` +
+  `<ul class="foot-links"><li><a href="/">Home</a></li><li><a href="/philosophy/">Teaching Philosophy</a></li><li><a href="/resume/">Resume</a></li><li><a href="/goals/">Career Goals</a></li><li><a href="/peace_corps/">Peace Corps</a></li></ul>` +
   `</div></footer>` +
   `<button type="button" class="to-top" aria-label="Back to top"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 15l7-7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>` +
   `<div class="toast" role="status" aria-live="polite"></div>`);

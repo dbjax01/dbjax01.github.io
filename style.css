@@ -532,3 +532,39 @@ nav>ul{z-index:3}
   .sess::before,.sess summary,.sess summary::after,.sess-list .n{transition:none}
   .sess .sess-list li{animation:none!important}
 }
+
+/* ===== Unified layer: shared buttons, focus, nav call-to-action, two-column sections ===== */
+html{scroll-padding-top:84px;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+:where(a,button,summary,input,[tabindex]):focus-visible{outline:3px solid var(--pencil);outline-offset:3px;border-radius:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;line-height:1.2;cursor:pointer}
+.btn.alt{background:transparent;color:var(--ink)}
+.btn.alt:hover{background:var(--ink);color:var(--white)}
+.crumb::before{content:"\2190\00a0"}
+nav .nav-cta{background:var(--ink);color:var(--white);padding:8px 16px;border-radius:4px;text-decoration:none}
+nav ul a.nav-cta:hover,nav ul a.nav-cta[aria-current]{color:var(--white);background:var(--chalk);text-decoration:none}
+@media (max-width:900px){nav .nav-cta{display:block;text-align:center;margin-top:8px}}
+@media (max-width:560px){section{padding:56px 0}}
+
+/* Two-column section: label on the left, content on the right (philosophy page, reusable anywhere) */
+.head-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,8fr);gap:56px;align-items:start}
+.head-grid .lede{font-style:italic}
+.head-grid .intro p{margin:0 0 1em}
+.head-grid .intro p:last-child{margin-bottom:0}
+.row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,8fr);gap:56px;padding:56px 0;border-top:1px solid var(--line)}
+.row .side{position:sticky;top:96px;align-self:start}
+.row .side h2{margin:0 0 12px}
+.row .side p{font-size:1.1rem;color:var(--ink2);margin:0;max-width:30ch}
+.row .body,.row .body p{max-width:none}
+.qa details{border-top:1px solid var(--line)}
+.qa details:last-of-type{border-bottom:1px solid var(--line)}
+.qa summary{cursor:pointer;list-style:none;font:700 1.1rem var(--head);padding:18px 40px 18px 0;position:relative}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:1.6rem;line-height:1}
+.qa details[open] summary::after{content:"\2212"}
+.qa details p{margin:0 0 18px}
+@media (max-width:820px){
+  .head-grid,.row{grid-template-columns:1fr;gap:24px}
+  .row{padding:40px 0}
+  .row .side{position:static}
+}
