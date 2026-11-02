@@ -43,10 +43,15 @@
     const countUp = (el) => {
       if (reduced) return;
       const to = +el.dataset.count, t0 = performance.now();
+      const box = el.parentElement;
+      box.style.minWidth = "";
+      el.textContent = to;
+      box.style.minWidth = box.getBoundingClientRect().width + "px";
       const step = (now) => {
         const t = Math.min(1, (now - t0) / 900);
         el.textContent = Math.round(to * ease(t));
         if (t < 1) requestAnimationFrame(step);
+        else box.style.minWidth = "";
       };
       el.textContent = "0";
       requestAnimationFrame(step);
